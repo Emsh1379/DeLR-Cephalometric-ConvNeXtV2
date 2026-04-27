@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Datasets and outputs
+outputs/
+outputs_smoke/
+Aariz/
+Aariz_resized_*/
+*Dataset*/
+*.zip
+
+# Trained weights (host on Hugging Face)
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
