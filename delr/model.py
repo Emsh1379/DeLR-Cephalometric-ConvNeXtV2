@@ -117,6 +117,45 @@ def bilinear_sample_at_points(feat: torch.Tensor, coords_xy_imgspace: torch.Tens
     return sampled
 
 
+def image_patches_at_points(
+    image: torch.Tensor,
+    coords_xy_imgspace: torch.Tensor,
+    patch_size: int,
+    radius_px: float,
+) -> torch.Tensor:
+    """
+    Crop differentiable square image patches centered at landmark coordinates.
+    Returns [B*K, C, patch_size, patch_size].
+    """
+    b, c, h, w = image.shape
+    k = coords_xy_imgspace.shape[1]
+    device = image.device
+    offsets = torch.linspace(-radius_px, radius_px, patch_size, device=device)
+    yy, xx = torch.meshgrid(offsets, offsets, indexing="ij")
+
+    centers = coords_xy_imgspace.reshape(b * k, 2)
+    sample_x = centers[:, 0].view(-1, 1, 1) + xx.view(1, patch_size, patch_size)
+    sample_y = centers[:, 1].view(-1, 1, 1) + yy.view(1, patch_size, patch_size)
+    x_norm = (sample_x / max(w - 1, 1)) * 2.0 - 1.0
+    y_norm = (sample_y / max(h - 1, 1)) * 2.0 - 1.0
+    grid = torch.stack([x_norm, y_norm], dim=-1)
+
+    patches = []
+    for idx in range(k):
+        start = idx * b
+        end = start + b
+        patches.append(
+            F.grid_sample(
+                image,
+                grid[start:end],
+                mode="bilinear",
+                padding_mode="border",
+                align_corners=True,
+            )
+        )
+    return torch.cat(patches, dim=0)
+
+
 # -----------------------------
 # Losses (auxiliary helpers)
 # -----------------------------
@@ -238,12 +277,26 @@ class DCeLR(nn.Module):
         heatmap_channels: Optional[int] = None,  # if None -> K
         dropout: float = 0.1,
         backbone: str = "convnextv2_base",
+        use_fpn_refine: bool = False,
+        fpn_dim: int = 256,
+        fpn_refine_level: str = "p2",
+        use_patch_refine: bool = False,
+        patch_size: int = 64,
+        patch_radius: float = 32.0,
+        use_hr_heatmap_refine: bool = False,
     ):
         super().__init__()
         K = num_landmarks
         self.K = K
         self.d_model = d_model
         self.in_channels = in_channels
+        self.use_fpn_refine = use_fpn_refine
+        self.fpn_refine_level = fpn_refine_level
+        self.use_patch_refine = use_patch_refine
+        self.patch_size = patch_size
+        self.patch_radius = patch_radius
+        self.use_hr_heatmap_refine = use_hr_heatmap_refine
+        self.use_fpn_features = use_fpn_refine or use_hr_heatmap_refine
 
         # 1) Feature extractor -----------------------------------------------
         self.backbone_name = backbone
@@ -265,6 +318,91 @@ class DCeLR(nn.Module):
 
         # Heatmap head from S5 (auxiliary)
         self.heatmap_out = nn.Conv2d(c5, heatmap_channels or K, kernel_size=1)
+
+        # Optional high-resolution FPN point refiner. The transformer still
+        # attends over S5-sized tokens; the FPN is sampled only at landmark
+        # coordinates to keep memory bounded at 1024px inputs.
+        if self.use_fpn_features:
+            if fpn_refine_level not in {"p2", "p3", "p4", "multi"}:
+                raise ValueError("fpn_refine_level must be one of: p2, p3, p4, multi.")
+            self.fpn_lateral2 = nn.Conv2d(c2, fpn_dim, kernel_size=1)
+            self.fpn_lateral3 = nn.Conv2d(c3, fpn_dim, kernel_size=1)
+            self.fpn_lateral4 = nn.Conv2d(c4, fpn_dim, kernel_size=1)
+            self.fpn_lateral5 = nn.Conv2d(c5, fpn_dim, kernel_size=1)
+            self.fpn_smooth2 = nn.Conv2d(fpn_dim, fpn_dim, kernel_size=3, padding=1)
+            self.fpn_smooth3 = nn.Conv2d(fpn_dim, fpn_dim, kernel_size=3, padding=1)
+            self.fpn_smooth4 = nn.Conv2d(fpn_dim, fpn_dim, kernel_size=3, padding=1)
+
+        if self.use_fpn_refine:
+            if fpn_refine_level == "multi":
+                self.local_fpn_project = nn.Sequential(
+                    nn.LayerNorm(fpn_dim * 3),
+                    nn.Linear(fpn_dim * 3, fpn_dim),
+                    nn.GELU(),
+                )
+            self.local_landmark_embed = nn.Parameter(torch.randn(K, fpn_dim) * 0.02)
+            self.local_offset_head = nn.Sequential(
+                nn.LayerNorm(fpn_dim),
+                nn.Linear(fpn_dim, fpn_dim),
+                nn.GELU(),
+                nn.Linear(fpn_dim, fpn_dim // 2),
+                nn.GELU(),
+                nn.Linear(fpn_dim // 2, 2),
+            )
+            self.local_log_sigma_head = nn.Sequential(
+                nn.LayerNorm(fpn_dim),
+                nn.Linear(fpn_dim, fpn_dim // 2),
+                nn.GELU(),
+                nn.Linear(fpn_dim // 2, 1),
+            )
+            nn.init.zeros_(self.local_offset_head[-1].weight)
+            nn.init.zeros_(self.local_offset_head[-1].bias)
+            nn.init.zeros_(self.local_log_sigma_head[-1].weight)
+            nn.init.zeros_(self.local_log_sigma_head[-1].bias)
+
+        if self.use_patch_refine:
+            patch_dim = 128
+            self.patch_encoder = nn.Sequential(
+                nn.Conv2d(in_channels, 32, kernel_size=3, padding=1),
+                nn.GELU(),
+                nn.Conv2d(32, 64, kernel_size=3, stride=2, padding=1),
+                nn.GELU(),
+                nn.Conv2d(64, patch_dim, kernel_size=3, stride=2, padding=1),
+                nn.GELU(),
+                nn.AdaptiveAvgPool2d(1),
+            )
+            self.patch_landmark_embed = nn.Parameter(torch.randn(K, patch_dim) * 0.02)
+            self.patch_offset_head = nn.Sequential(
+                nn.LayerNorm(patch_dim),
+                nn.Linear(patch_dim, patch_dim),
+                nn.GELU(),
+                nn.Linear(patch_dim, 2),
+            )
+            self.patch_log_sigma_head = nn.Sequential(
+                nn.LayerNorm(patch_dim),
+                nn.Linear(patch_dim, patch_dim // 2),
+                nn.GELU(),
+                nn.Linear(patch_dim // 2, 1),
+            )
+            nn.init.zeros_(self.patch_offset_head[-1].weight)
+            nn.init.zeros_(self.patch_offset_head[-1].bias)
+            nn.init.zeros_(self.patch_log_sigma_head[-1].weight)
+            nn.init.zeros_(self.patch_log_sigma_head[-1].bias)
+
+        if self.use_hr_heatmap_refine:
+            self.hr_heatmap_head = nn.Conv2d(fpn_dim, K, kernel_size=1)
+            self.hr_offset_head = nn.Conv2d(fpn_dim, K * 2, kernel_size=1)
+            self.hr_log_sigma_head = nn.Sequential(
+                nn.LayerNorm(fpn_dim),
+                nn.Linear(fpn_dim, fpn_dim // 2),
+                nn.GELU(),
+                nn.Linear(fpn_dim // 2, 1),
+            )
+            self.hr_fusion_logit = nn.Parameter(torch.full((K, 1), -2.0))
+            nn.init.zeros_(self.hr_offset_head.weight)
+            nn.init.zeros_(self.hr_offset_head.bias)
+            nn.init.zeros_(self.hr_log_sigma_head[-1].weight)
+            nn.init.zeros_(self.hr_log_sigma_head[-1].bias)
 
         # 2) Reference encoder ------------------------------------------------
         enc_layer_ref = nn.TransformerEncoderLayer(
@@ -341,7 +479,36 @@ class DCeLR(nn.Module):
 
         fu = f2 + f3 + f4 + f5  # fused feature
 
-        return dict(S2=s2, S3=s3, S4=s4, S5=s5, F2=f2, F3=f3, F4=f4, F5=f5, Fu=fu, Hmap=hmap_logits)
+        fpn_refine = None
+        fpn_pyramid = None
+        if self.use_fpn_features:
+            p5 = self.fpn_lateral5(s5)
+            p4 = self.fpn_lateral4(s4) + F.interpolate(p5, size=s4.shape[-2:], mode='bilinear', align_corners=True)
+            p3 = self.fpn_lateral3(s3) + F.interpolate(p4, size=s3.shape[-2:], mode='bilinear', align_corners=True)
+            p2 = self.fpn_lateral2(s2) + F.interpolate(p3, size=s2.shape[-2:], mode='bilinear', align_corners=True)
+            p4 = self.fpn_smooth4(p4)
+            p3 = self.fpn_smooth3(p3)
+            p2 = self.fpn_smooth2(p2)
+            fpn_pyramid = {"p2": p2, "p3": p3, "p4": p4}
+            if self.fpn_refine_level == "multi":
+                fpn_refine = fpn_pyramid
+            else:
+                fpn_refine = fpn_pyramid[self.fpn_refine_level]
+
+        return dict(
+            S2=s2,
+            S3=s3,
+            S4=s4,
+            S5=s5,
+            F2=f2,
+            F3=f3,
+            F4=f4,
+            F5=f5,
+            Fu=fu,
+            Hmap=hmap_logits,
+            FPNRefine=fpn_refine,
+            FPNPyramid=fpn_pyramid,
+        )
 
     # --------- Reference encoder (coarse) ---------
 
@@ -448,6 +615,84 @@ class DCeLR(nn.Module):
         log_sigma_final = logsig_list[-1]
         return mu_list, logsig_list, mu_final, log_sigma_final
 
+    def _local_offset_stage(
+        self,
+        fpn_feat,
+        mu_init: torch.Tensor,
+        H_img: int,
+        W_img: int,
+    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        """
+        Predict a final coordinate residual from high-resolution FPN features
+        sampled at the current landmark locations.
+        """
+        b = mu_init.shape[0]
+        if isinstance(fpn_feat, dict):
+            sampled_levels = [
+                bilinear_sample_at_points(fpn_feat[level], mu_init, H_img=H_img, W_img=W_img)
+                for level in ("p2", "p3", "p4")
+            ]
+            sampled = self.local_fpn_project(torch.cat(sampled_levels, dim=-1))
+        else:
+            sampled = bilinear_sample_at_points(fpn_feat, mu_init, H_img=H_img, W_img=W_img)
+        landmark_embed = self.local_landmark_embed.unsqueeze(0).expand(b, -1, -1)
+        local_feat = sampled + landmark_embed
+        delta = self.local_offset_head(local_feat)
+        log_sigma = self.local_log_sigma_head(local_feat)
+        return mu_init + delta, log_sigma, delta
+
+    def _patch_refine_stage(
+        self,
+        image: torch.Tensor,
+        mu_init: torch.Tensor,
+    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        """
+        Refine each landmark from a high-resolution image patch centered on
+        the current coordinate estimate.
+        """
+        b, k, _ = mu_init.shape
+        patches = image_patches_at_points(
+            image=image,
+            coords_xy_imgspace=mu_init,
+            patch_size=self.patch_size,
+            radius_px=self.patch_radius,
+        )
+        patch_feat = self.patch_encoder(patches).flatten(1).view(b, k, -1)
+        patch_feat = patch_feat + self.patch_landmark_embed.unsqueeze(0)
+        delta = self.patch_offset_head(patch_feat)
+        log_sigma = self.patch_log_sigma_head(patch_feat)
+        return mu_init + delta, log_sigma, delta
+
+    def _hr_heatmap_stage(
+        self,
+        p2: torch.Tensor,
+        H_img: int,
+        W_img: int,
+    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+        """
+        Dense stride-4 heatmap + offset coordinate head.
+        The heatmap gives the expected cell location and the offset head
+        predicts the sub-cell correction in input-image pixels.
+        """
+        b, c, h, w = p2.shape
+        heatmap_logits = self.hr_heatmap_head(p2)
+        offset = self.hr_offset_head(p2).view(b, self.K, 2, h, w)
+        probs = heatmap_logits.flatten(2).softmax(dim=-1).view(b, self.K, h, w)
+
+        grid_y = torch.arange(h, device=p2.device, dtype=p2.dtype).view(1, 1, h, 1)
+        grid_x = torch.arange(w, device=p2.device, dtype=p2.dtype).view(1, 1, 1, w)
+        x_feat = (probs * grid_x).sum(dim=(2, 3))
+        y_feat = (probs * grid_y).sum(dim=(2, 3))
+        stride_x = W_img / float(w)
+        stride_y = H_img / float(h)
+        base = torch.stack([(x_feat + 0.5) * stride_x, (y_feat + 0.5) * stride_y], dim=-1)
+
+        offset_xy = (probs.unsqueeze(2) * offset).sum(dim=(3, 4))
+        mu = base + offset_xy
+        weighted_feat = (probs.unsqueeze(2) * p2.unsqueeze(1)).sum(dim=(3, 4))
+        log_sigma = self.hr_log_sigma_head(weighted_feat)
+        return mu, log_sigma, heatmap_logits, offset, probs
+
     # --------- Forward ---------
 
     def forward(
@@ -485,6 +730,45 @@ class DCeLR(nn.Module):
             fu=fu, img_tokens_fu=img_tok_fu, mu_init=mu_R, H_img=H, W_img=W
         )
 
+        local_delta = None
+        if self.use_fpn_refine:
+            fpn_refine = feats["FPNRefine"]
+            if fpn_refine is None:
+                raise RuntimeError("FPN refinement was enabled but no FPN feature was produced.")
+            mu_A, log_sigma_A, local_delta = self._local_offset_stage(
+                fpn_feat=fpn_refine,
+                mu_init=mu_A,
+                H_img=H,
+                W_img=W,
+            )
+            mu_list.append(mu_A)
+            logsig_list.append(log_sigma_A)
+
+        patch_delta = None
+        if self.use_patch_refine:
+            mu_A, log_sigma_A, patch_delta = self._patch_refine_stage(x, mu_A)
+            mu_list.append(mu_A)
+            logsig_list.append(log_sigma_A)
+
+        hr_mu = None
+        hr_log_sigma = None
+        hr_heatmap = None
+        hr_offset = None
+        if self.use_hr_heatmap_refine:
+            fpn_pyramid = feats["FPNPyramid"]
+            if fpn_pyramid is None:
+                raise RuntimeError("High-resolution heatmap refinement requires FPN features.")
+            hr_mu, hr_log_sigma, hr_heatmap, hr_offset, hr_probs = self._hr_heatmap_stage(
+                fpn_pyramid["p2"],
+                H_img=H,
+                W_img=W,
+            )
+            fusion_w = torch.sigmoid(self.hr_fusion_logit).unsqueeze(0)
+            mu_A = (1.0 - fusion_w) * mu_A + fusion_w * hr_mu
+            log_sigma_A = (1.0 - fusion_w) * log_sigma_A + fusion_w * hr_log_sigma
+            mu_list.append(mu_A)
+            logsig_list.append(log_sigma_A)
+
         out: Dict[str, torch.Tensor] = {
             "aux_heatmap": feats["Hmap"],                 # [B,K,Hs5,Ws5]
             "coarse_mu": mu_R,                            # [B,K,2]
@@ -492,6 +776,15 @@ class DCeLR(nn.Module):
             "fine_mu": mu_A,                              # [B,K,2]
             "fine_log_sigma": log_sigma_A,                # [B,K,1]
         }
+        if local_delta is not None:
+            out["local_delta"] = local_delta
+        if patch_delta is not None:
+            out["patch_delta"] = patch_delta
+        if hr_mu is not None:
+            out["hr_mu"] = hr_mu
+            out["hr_log_sigma"] = hr_log_sigma
+            out["hr_heatmap"] = hr_heatmap
+            out["hr_offset"] = hr_offset
 
         # Pack lists (for loss over layers)
         # (keep as lists for easy per-layer RLE sums)
@@ -553,6 +846,13 @@ def build_dcelr(
     in_channels: int = 1,
     dropout: float = 0.1,
     backbone: str = "convnextv2_base",
+    use_fpn_refine: bool = False,
+    fpn_dim: int = 256,
+    fpn_refine_level: str = "p2",
+    use_patch_refine: bool = False,
+    patch_size: int = 64,
+    patch_radius: float = 32.0,
+    use_hr_heatmap_refine: bool = False,
 ):
     """
     Convenience builder with stronger default backbone (ConvNeXt V2 Base).
@@ -569,6 +869,13 @@ def build_dcelr(
         heatmap_channels=num_landmarks,
         dropout=dropout,
         backbone=backbone,
+        use_fpn_refine=use_fpn_refine,
+        fpn_dim=fpn_dim,
+        fpn_refine_level=fpn_refine_level,
+        use_patch_refine=use_patch_refine,
+        patch_size=patch_size,
+        patch_radius=patch_radius,
+        use_hr_heatmap_refine=use_hr_heatmap_refine,
     )
 
 

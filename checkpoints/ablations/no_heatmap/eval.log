@@ -1,0 +1,10 @@
+/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+Saved predictions to outputs/ablation_no_heatmap/test1_predictions.json
+MRE(mm): 1.171 | MRE(px): 11.705
+SDR: 86.18%@2.0mm / 91.82%@2.5mm / 95.30%@3.0mm / 98.00%@4.0mm
+/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+Saved predictions to outputs/ablation_no_heatmap/test2_predictions.json
+MRE(mm): 1.549 | MRE(px): 15.487
+SDR: 74.11%@2.0mm / 81.63%@2.5mm / 87.58%@3.0mm / 94.37%@4.0mm

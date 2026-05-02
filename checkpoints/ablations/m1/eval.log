@@ -1,0 +1,11 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+Saved predictions to outputs/ablation_m1/test1_predictions.json
+MRE(mm): 1.770 | MRE(px): 17.703
+SDR: 65.75%@2.0mm / 79.05%@2.5mm / 86.32%@3.0mm / 95.54%@4.0mm
+/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+Saved predictions to outputs/ablation_m1/test2_predictions.json
+MRE(mm): 2.112 | MRE(px): 21.120
+SDR: 58.26%@2.0mm / 70.79%@2.5mm / 79.68%@3.0mm / 89.89%@4.0mm

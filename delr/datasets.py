@@ -511,6 +511,242 @@ class CephAdoAduDataset(Dataset):
         return coords
 
 
+class ISBI2015Dataset(Dataset):
+    """
+    Dataset wrapper for the ISBI 2015 Cephalometric Challenge release
+    (figshare 37ec464af8e81ae6ebbf).
+
+    Layout:
+        <root>/
+            RawImage/TrainingData/{001..150}.bmp
+            RawImage/Test1Data/{151..300}.bmp
+            RawImage/Test2Data/{301..400}.bmp
+            400_junior/{001..400}.txt   # 19 lines "x,y" + trailing classification rows
+            400_senior/{001..400}.txt
+
+    19 landmarks per image. Annotations are averaged across the junior + senior
+    orthodontists, matching the standard ISBI evaluation protocol.
+
+    Splits:
+        - "train"  -> RawImage/TrainingData (150 images, 001-150)
+        - "valid"  -> RawImage/Test1Data    (150 images, 151-300)
+        - "test1"  -> alias for valid
+        - "test"   -> RawImage/Test2Data    (100 images, 301-400)
+        - "test2"  -> alias for test
+
+    The ISBI 2015 scanner pixel size is 0.1 mm (configurable via
+    `default_pixel_size_mm`).
+    """
+
+    NUM_LANDMARKS = 19
+
+    DEFAULT_AUGMENT_PARAMS = AarizCephalometricDataset.DEFAULT_AUGMENT_PARAMS
+
+    _apply_augmentations = AarizCephalometricDataset._apply_augmentations
+    _generate_gaussian_heatmaps = AarizCephalometricDataset._generate_gaussian_heatmaps
+    _transform_coords_affine = staticmethod(AarizCephalometricDataset._transform_coords_affine)
+    _clip_coords = staticmethod(AarizCephalometricDataset._clip_coords)
+
+    _SPLIT_DIRS = {
+        "train": "TrainingData",
+        "valid": "Test1Data",
+        "test1": "Test1Data",
+        "test":  "Test2Data",
+        "test2": "Test2Data",
+    }
+
+    def __init__(
+        self,
+        dataset_root: Path,
+        split: str,
+        image_size: int = 1024,
+        heatmap_sigma: float = 1.5,
+        heatmap_stride: int = 32,
+        return_heatmap: bool = True,
+        to_tensor: Optional[transforms.Compose] = None,
+        augment: bool = False,
+        augmentation_params: Optional[Dict[str, float]] = None,
+        normalize: bool = False,
+        default_pixel_size_mm: float = 0.1,
+    ) -> None:
+        super().__init__()
+        if split not in self._SPLIT_DIRS:
+            raise ValueError(
+                f"Unsupported split='{split}' for ISBI2015. "
+                f"Use one of: {sorted(self._SPLIT_DIRS)}."
+            )
+        self.dataset_root = Path(dataset_root)
+        self.split = split
+        self.image_size = image_size
+        self.heatmap_sigma = heatmap_sigma
+        self.heatmap_stride = heatmap_stride
+        self.return_heatmap = return_heatmap
+        self.augment = augment
+        self.normalize = normalize
+        self.default_pixel_size_mm = float(default_pixel_size_mm)
+        self.num_landmarks = self.NUM_LANDMARKS
+        self.landmark_names = [str(i + 1) for i in range(self.num_landmarks)]
+
+        self.resize = transforms.Resize(
+            (image_size, image_size),
+            interpolation=InterpolationMode.BICUBIC,
+            antialias=True,
+        )
+        self.to_tensor = to_tensor or transforms.Compose([transforms.ToTensor()])
+        self.normalize_transform = transforms.Normalize(mean=[0.5], std=[0.5]) if normalize else None
+        self.augmentation_params = {**self.DEFAULT_AUGMENT_PARAMS}
+        if augmentation_params:
+            self.augmentation_params.update(augmentation_params)
+
+        image_dir = self.dataset_root / "RawImage" / self._SPLIT_DIRS[split]
+        if not image_dir.exists():
+            raise FileNotFoundError(f"Missing ISBI image folder: {image_dir}")
+        self.image_dir = image_dir
+
+        self.junior_dir = self.dataset_root / "400_junior"
+        self.senior_dir = self.dataset_root / "400_senior"
+        if not self.junior_dir.exists() or not self.senior_dir.exists():
+            raise FileNotFoundError(
+                f"Missing ISBI annotation folders at {self.junior_dir} / {self.senior_dir}"
+            )
+
+        self.samples = sorted(
+            p for p in image_dir.iterdir()
+            if p.suffix.lower() in {".bmp", ".png", ".jpg", ".jpeg"}
+        )
+        if not self.samples:
+            raise RuntimeError(f"No ISBI images in {image_dir}")
+
+    def __len__(self) -> int:
+        return len(self.samples)
+
+    def __getitem__(self, idx: int):
+        image_path = self.samples[idx]
+        image_id = image_path.stem
+        coords = self._load_annotation(image_id)
+
+        image = Image.open(image_path).convert("L")
+        if self.augment:
+            image, coords = self._apply_augmentations(image, coords)
+
+        base_w, base_h = image.size
+        image = self.resize(image)
+        resized_w, resized_h = image.size
+
+        scale_x = resized_w / float(base_w)
+        scale_y = resized_h / float(base_h)
+
+        coords = coords * np.array([scale_x, scale_y], dtype=np.float32)
+        coords = self._clip_coords(coords, resized_w, resized_h)
+
+        image_tensor = self.to_tensor(image)
+        if self.normalize_transform is not None:
+            image_tensor = self.normalize_transform(image_tensor)
+        if self.augment and random.random() < self.augmentation_params["noise_prob"]:
+            noise = torch.randn_like(image_tensor) * self.augmentation_params["noise_std"]
+            image_tensor = (image_tensor + noise).clamp_(0.0, 1.0)
+
+        coords_tensor = torch.from_numpy(coords).float()
+
+        meta_dict = {
+            "image_id": image_id,
+            "original_width": float(base_w),
+            "original_height": float(base_h),
+            "scale_x": float(scale_x),
+            "scale_y": float(scale_y),
+            "pixel_size_mm": float(self.default_pixel_size_mm),
+        }
+
+        if not self.return_heatmap:
+            return image_tensor, coords_tensor, meta_dict
+
+        heatmap = self._generate_gaussian_heatmaps(coords_tensor, resized_h, resized_w)
+        return image_tensor, coords_tensor, heatmap, meta_dict
+
+    def _load_annotation(self, image_id: str) -> np.ndarray:
+        junior_path = self.junior_dir / f"{image_id}.txt"
+        senior_path = self.senior_dir / f"{image_id}.txt"
+        if not junior_path.exists() or not senior_path.exists():
+            raise FileNotFoundError(
+                f"Missing ISBI annotation for {image_id} (junior={junior_path.exists()}, senior={senior_path.exists()})"
+            )
+        junior = self._parse_landmark_file(junior_path)
+        senior = self._parse_landmark_file(senior_path)
+        return ((junior + senior) * 0.5).astype(np.float32)
+
+    def _parse_landmark_file(self, path: Path) -> np.ndarray:
+        coords: List[List[float]] = []
+        with path.open() as f:
+            for line in f:
+                line = line.strip()
+                if not line or "," not in line:
+                    continue
+                parts = line.split(",")
+                if len(parts) < 2:
+                    continue
+                try:
+                    x = float(parts[0])
+                    y = float(parts[1])
+                except ValueError:
+                    continue
+                coords.append([x, y])
+                if len(coords) >= self.NUM_LANDMARKS:
+                    break
+        if len(coords) < self.NUM_LANDMARKS:
+            raise ValueError(
+                f"{path} has {len(coords)} landmarks, expected {self.NUM_LANDMARKS}"
+            )
+        return np.asarray(coords, dtype=np.float32)
+
+
+def create_isbi2015_dataloaders(
+    dataset_root: Path,
+    batch_size: int = 2,
+    num_workers: int = 2,
+    image_size: int = 1024,
+    heatmap_sigma: float = 1.5,
+    augment_train: bool = False,
+    augmentation_params: Optional[Dict[str, float]] = None,
+    normalize: bool = False,
+    default_pixel_size_mm: float = 0.1,
+) -> Tuple[torch.utils.data.DataLoader, torch.utils.data.DataLoader]:
+    train_ds = ISBI2015Dataset(
+        dataset_root=dataset_root,
+        split="train",
+        image_size=image_size,
+        heatmap_sigma=heatmap_sigma,
+        augment=augment_train,
+        augmentation_params=augmentation_params,
+        normalize=normalize,
+        default_pixel_size_mm=default_pixel_size_mm,
+    )
+    val_ds = ISBI2015Dataset(
+        dataset_root=dataset_root,
+        split="valid",
+        image_size=image_size,
+        heatmap_sigma=heatmap_sigma,
+        augment=False,
+        augmentation_params=augmentation_params,
+        normalize=normalize,
+        default_pixel_size_mm=default_pixel_size_mm,
+    )
+    train_loader = torch.utils.data.DataLoader(
+        train_ds,
+        batch_size=batch_size,
+        shuffle=True,
+        num_workers=num_workers,
+        pin_memory=True,
+    )
+    val_loader = torch.utils.data.DataLoader(
+        val_ds,
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=num_workers,
+        pin_memory=True,
+    )
+    return train_loader, val_loader
+
+
 def create_cephadoadu_dataloaders(
     dataset_root: Path,
     batch_size: int = 2,

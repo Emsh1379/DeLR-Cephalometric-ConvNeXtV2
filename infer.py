@@ -6,7 +6,7 @@ from typing import Dict, Optional
 import torch
 
 from delr import build_dcelr
-from delr.datasets import AarizCephalometricDataset, CephAdoAduDataset
+from delr.datasets import AarizCephalometricDataset, CephAdoAduDataset, ISBI2015Dataset
 from delr.metrics import compute_mre_and_sdr, DEFAULT_THRESHOLDS_MM
 
 
@@ -18,12 +18,17 @@ def parse_args() -> argparse.Namespace:
         default=Path("/teamspace/studios/this_studio/Aariz/Aariz"),
         help="Root directory of the Aariz dataset.",
     )
-    parser.add_argument("--split", type=str, default="test", choices=["train", "valid", "test"])
+    parser.add_argument(
+        "--split",
+        type=str,
+        default="test",
+        choices=["train", "valid", "test", "test1", "test2"],
+    )
     parser.add_argument(
         "--dataset",
         type=str,
         default="aariz",
-        choices=["aariz", "cephadoadu"],
+        choices=["aariz", "cephadoadu", "isbi2015"],
     )
     parser.add_argument("--landmarks", type=str, default="26", choices=["19", "26", "all"])
     parser.add_argument(
@@ -58,6 +63,44 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Skip metric computation even if ground-truth annotations are available.",
     )
+    parser.add_argument(
+        "--tta-flip",
+        action="store_true",
+        help="Test-time augmentation: average predictions from the image and its horizontal flip.",
+    )
+    parser.add_argument(
+        "--no-finetune",
+        action="store_true",
+        help="Use reference-encoder predictions (coarse_mu) instead of fine_mu.",
+    )
+    parser.add_argument(
+        "--num-finetune-layers",
+        type=int,
+        default=4,
+        help="M: number of finetune-encoder layers used to build the model (must match the checkpoint).",
+    )
+    parser.add_argument(
+        "--fpn-refine",
+        action="store_true",
+        help="Enable high-resolution FPN sampling plus a local offset refinement head.",
+    )
+    parser.add_argument(
+        "--fpn-dim",
+        type=int,
+        default=256,
+        help="Channel width for the optional FPN local refinement branch.",
+    )
+    parser.add_argument(
+        "--fpn-refine-level",
+        type=str,
+        default="p2",
+        choices=["p2", "p3", "p4", "multi"],
+        help="FPN level sampled by the local offset head. Use 'multi' for p2+p3+p4.",
+    )
+    parser.add_argument("--patch-refine", action="store_true")
+    parser.add_argument("--patch-size", type=int, default=64)
+    parser.add_argument("--patch-radius", type=float, default=32.0)
+    parser.add_argument("--hr-heatmap-refine", action="store_true")
     return parser.parse_args()
 
 
@@ -95,6 +138,14 @@ def main() -> None:
             return_heatmap=False,
             default_pixel_size_mm=args.pixel_size_mm,
         )
+    elif args.dataset == "isbi2015":
+        dataset = ISBI2015Dataset(
+            dataset_root=args.dataset_root,
+            split=args.split,
+            image_size=args.image_size,
+            return_heatmap=False,
+            default_pixel_size_mm=args.pixel_size_mm,
+        )
     else:
         dataset = AarizCephalometricDataset(
             dataset_root=args.dataset_root,
@@ -113,10 +164,26 @@ def main() -> None:
     )
 
     checkpoint = torch.load(args.checkpoint, map_location=device)
+    model_config = checkpoint.get("model_config", {}) if isinstance(checkpoint, dict) else {}
+    use_fpn_refine = args.fpn_refine or bool(model_config.get("use_fpn_refine", False))
+    fpn_dim = int(model_config.get("fpn_dim", args.fpn_dim))
+    fpn_refine_level = str(model_config.get("fpn_refine_level", args.fpn_refine_level))
+    use_patch_refine = args.patch_refine or bool(model_config.get("use_patch_refine", False))
+    patch_size = int(model_config.get("patch_size", args.patch_size))
+    patch_radius = float(model_config.get("patch_radius", args.patch_radius))
+    use_hr_heatmap_refine = args.hr_heatmap_refine or bool(model_config.get("use_hr_heatmap_refine", False))
     model = build_dcelr(
         num_landmarks=dataset.num_landmarks,
         in_channels=1,
-        backbone=args.backbone,
+        backbone=model_config.get("backbone", args.backbone),
+        num_layers_finetune=int(model_config.get("num_layers_finetune", max(1, args.num_finetune_layers))),
+        use_fpn_refine=use_fpn_refine,
+        fpn_dim=fpn_dim,
+        fpn_refine_level=fpn_refine_level,
+        use_patch_refine=use_patch_refine,
+        patch_size=patch_size,
+        patch_radius=patch_radius,
+        use_hr_heatmap_refine=use_hr_heatmap_refine,
     ).to(device)
     state_dict = checkpoint.get("state_dict", checkpoint)
     model.load_state_dict(state_dict)
@@ -137,9 +204,17 @@ def main() -> None:
             raise ValueError("Unexpected batch format from dataset.")
         images = images.to(device, non_blocking=True)
 
+        pred_key = "coarse_mu" if args.no_finetune else "fine_mu"
         with torch.no_grad():
             out = model(images)
-        preds = out["fine_mu"].cpu()
+            preds = out[pred_key]
+            if args.tta_flip:
+                images_flip = torch.flip(images, dims=[-1])
+                out_flip = model(images_flip)
+                preds_flip = out_flip[pred_key].clone()
+                preds_flip[..., 0] = (args.image_size - 1) - preds_flip[..., 0]
+                preds = (preds + preds_flip) * 0.5
+        preds = preds.cpu()
         append_predictions(predictions, preds, metas)
 
         if not args.skip_metrics:

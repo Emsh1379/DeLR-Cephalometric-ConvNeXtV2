@@ -1,9 +1,10 @@
 import argparse
 import time
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict, Optional, Tuple
 
 import torch
+import torch.nn.functional as F
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import OneCycleLR
 
@@ -12,8 +13,25 @@ from delr.datasets import (
     AarizCephalometricDataset,
     create_aariz_dataloaders,
     create_cephadoadu_dataloaders,
+    create_isbi2015_dataloaders,
 )
 from delr.metrics import compute_mre_and_sdr, DEFAULT_THRESHOLDS_MM
+from delr.model import dice_loss_from_logits, rle_loss_laplace
+
+
+def compatible_state_dict(
+    model: torch.nn.Module,
+    state_dict: Dict[str, torch.Tensor],
+) -> Tuple[Dict[str, torch.Tensor], int]:
+    model_state = model.state_dict()
+    filtered = {}
+    skipped = 0
+    for key, value in state_dict.items():
+        if key in model_state and model_state[key].shape == value.shape:
+            filtered[key] = value
+        else:
+            skipped += 1
+    return filtered, skipped
 
 
 def parse_args() -> argparse.Namespace:
@@ -28,7 +46,7 @@ def parse_args() -> argparse.Namespace:
         "--dataset",
         type=str,
         default="aariz",
-        choices=["aariz", "cephadoadu"],
+        choices=["aariz", "cephadoadu", "isbi2015"],
         help="Which dataset loader to use.",
     )
     parser.add_argument(
@@ -105,7 +123,141 @@ def parse_args() -> argparse.Namespace:
         help="Optional limit of validation batches per epoch (useful for debugging).",
     )
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
+    # Ablation flags
+    parser.add_argument(
+        "--no-heatmap",
+        action="store_true",
+        help="Disable auxiliary heatmap supervision (lambda_HM = 0).",
+    )
+    parser.add_argument(
+        "--no-finetune",
+        action="store_true",
+        help="Use reference-encoder predictions only (lambda_FE = 0, metric on coarse_mu).",
+    )
+    parser.add_argument(
+        "--no-rle",
+        action="store_true",
+        help="Replace RLE Laplace loss with plain mean radial L2 (no sigma).",
+    )
+    parser.add_argument(
+        "--num-finetune-layers",
+        type=int,
+        default=4,
+        help="M: number of finetune-encoder layers.",
+    )
+    parser.add_argument(
+        "--fpn-refine",
+        action="store_true",
+        help="Enable high-resolution FPN sampling plus a local offset refinement head.",
+    )
+    parser.add_argument(
+        "--fpn-dim",
+        type=int,
+        default=256,
+        help="Channel width for the optional FPN local refinement branch.",
+    )
+    parser.add_argument(
+        "--fpn-refine-level",
+        type=str,
+        default="p2",
+        choices=["p2", "p3", "p4", "multi"],
+        help="FPN level sampled by the local offset head. Use 'multi' for p2+p3+p4.",
+    )
+    parser.add_argument(
+        "--patch-refine",
+        action="store_true",
+        help="Enable a patch-based CNN residual refiner around each predicted landmark.",
+    )
+    parser.add_argument("--patch-size", type=int, default=64)
+    parser.add_argument("--patch-radius", type=float, default=32.0)
+    parser.add_argument(
+        "--hr-heatmap-refine",
+        action="store_true",
+        help="Enable a stride-4 dense heatmap + offset coordinate head.",
+    )
+    parser.add_argument("--hr-heatmap-sigma", type=float, default=1.5)
+    parser.add_argument("--hr-loss-weight", type=float, default=1.0)
+    parser.add_argument(
+        "--freeze-backbone",
+        action="store_true",
+        help="Freeze the image backbone during fine-tuning.",
+    )
     return parser.parse_args()
+
+
+def generate_heatmaps_for_shape(
+    coords: torch.Tensor,
+    image_size: int,
+    heatmap_h: int,
+    heatmap_w: int,
+    sigma: float,
+) -> torch.Tensor:
+    stride_x = image_size / float(heatmap_w)
+    stride_y = image_size / float(heatmap_h)
+    coords_hm_x = coords[..., 0] / stride_x
+    coords_hm_y = coords[..., 1] / stride_y
+
+    grid_y = torch.arange(heatmap_h, device=coords.device, dtype=coords.dtype).view(1, 1, heatmap_h, 1)
+    grid_x = torch.arange(heatmap_w, device=coords.device, dtype=coords.dtype).view(1, 1, 1, heatmap_w)
+    xs = coords_hm_x.unsqueeze(-1).unsqueeze(-1)
+    ys = coords_hm_y.unsqueeze(-1).unsqueeze(-1)
+    exp_term = ((grid_x - xs) ** 2 + (grid_y - ys) ** 2) / (2 * sigma**2)
+    return torch.exp(-exp_term).clamp_(min=1e-6).float()
+
+
+def compute_ablation_loss(
+    out: Dict[str, torch.Tensor],
+    gt_coords: torch.Tensor,
+    gt_heatmap: Optional[torch.Tensor],
+    args: argparse.Namespace,
+) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+    device = gt_coords.device
+    if (not args.no_heatmap) and gt_heatmap is not None:
+        pred_hmap = out["aux_heatmap"]
+        ph, pw = pred_hmap.shape[-2:]
+        gh, gw = gt_heatmap.shape[-2:]
+        if (ph != gh) or (pw != gw):
+            pred_hmap = F.interpolate(pred_hmap, size=(gh, gw), mode="bilinear", align_corners=True)
+        loss_hm = dice_loss_from_logits(pred_hmap, gt_heatmap) + F.mse_loss(torch.sigmoid(pred_hmap), gt_heatmap)
+    else:
+        loss_hm = torch.zeros((), device=device)
+
+    def reg(mu: torch.Tensor, log_sigma: torch.Tensor, mu_gt: torch.Tensor) -> torch.Tensor:
+        if args.no_rle:
+            return torch.linalg.norm(mu - mu_gt, dim=-1).mean()
+        return rle_loss_laplace(mu, log_sigma, mu_gt)
+
+    loss_re = reg(out["coarse_mu"], out["coarse_log_sigma"], gt_coords)
+
+    if args.no_finetune or out["fine_mu_per_layer"].shape[0] == 0:
+        loss_fe = torch.zeros((), device=device)
+    else:
+        M = out["fine_mu_per_layer"].shape[0]
+        layer_losses = [
+            reg(out["fine_mu_per_layer"][i], out["fine_log_sigma_per_layer"][i], gt_coords)
+            for i in range(M)
+        ]
+        loss_fe = torch.stack(layer_losses).sum()
+
+    if args.hr_heatmap_refine and "hr_heatmap" in out and not args.no_heatmap:
+        pred_hr = out["hr_heatmap"]
+        _, _, hh, hw = pred_hr.shape
+        gt_hr = generate_heatmaps_for_shape(
+            coords=gt_coords,
+            image_size=args.image_size,
+            heatmap_h=hh,
+            heatmap_w=hw,
+            sigma=args.hr_heatmap_sigma,
+        )
+        loss_hr_hm = dice_loss_from_logits(pred_hr, gt_hr) + F.mse_loss(torch.sigmoid(pred_hr), gt_hr)
+        loss_hm = loss_hm + args.hr_loss_weight * loss_hr_hm
+        if "hr_mu" in out and "hr_log_sigma" in out and not args.no_finetune:
+            loss_fe = loss_fe + args.hr_loss_weight * reg(out["hr_mu"], out["hr_log_sigma"], gt_coords)
+
+    lam_hm = 0.0 if args.no_heatmap else 1.0
+    lam_fe = 0.0 if args.no_finetune else 1.0
+    total = lam_hm * loss_hm + 1.0 * loss_re + lam_fe * loss_fe
+    return total, loss_hm, loss_re, loss_fe
 
 
 def train_one_epoch(
@@ -114,6 +266,7 @@ def train_one_epoch(
     optimizer: torch.optim.Optimizer,
     scheduler: OneCycleLR,
     device: torch.device,
+    args: argparse.Namespace,
     max_steps: Optional[int] = None,
 ) -> Dict[str, float]:
     model.train()
@@ -129,8 +282,9 @@ def train_one_epoch(
         heatmaps = heatmaps.to(device, non_blocking=True)
 
         optimizer.zero_grad(set_to_none=True)
-        out = model(images, gt_coords=coords, gt_heatmap=heatmaps)
-        loss = out["loss_total"]
+        out = model(images)
+        loss, loss_hm, loss_re, loss_fe = compute_ablation_loss(out, coords, heatmaps, args)
+        out["loss_total"], out["loss_hm"], out["loss_re"], out["loss_fe"] = loss, loss_hm, loss_re, loss_fe
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
@@ -160,6 +314,7 @@ def evaluate(
     model: torch.nn.Module,
     loader: torch.utils.data.DataLoader,
     device: torch.device,
+    args: argparse.Namespace,
     max_steps: Optional[int] = None,
 ) -> Dict[str, float]:
     model.eval()
@@ -173,21 +328,23 @@ def evaluate(
     total_points = 0.0
     threshold_keys = [str(thr).replace(".", "_") for thr in DEFAULT_THRESHOLDS_MM]
     sdr_hit_totals = {key: 0.0 for key in threshold_keys}
+    pred_key = "coarse_mu" if args.no_finetune else "fine_mu"
 
     for step_idx, (images, coords, heatmaps, metas) in enumerate(loader, start=1):
         images = images.to(device, non_blocking=True)
         coords = coords.to(device, non_blocking=True)
         heatmaps = heatmaps.to(device, non_blocking=True)
 
-        out = model(images, gt_coords=coords, gt_heatmap=heatmaps)
+        out = model(images)
+        loss, loss_hm, loss_re, loss_fe = compute_ablation_loss(out, coords, heatmaps, args)
         batch_size = images.size(0)
         total_samples += batch_size
-        total_loss += out["loss_total"].item() * batch_size
-        total_heatmap += out["loss_hm"].item() * batch_size
-        total_re += out["loss_re"].item() * batch_size
-        total_fe += out["loss_fe"].item() * batch_size
+        total_loss += loss.item() * batch_size
+        total_heatmap += loss_hm.item() * batch_size
+        total_re += loss_re.item() * batch_size
+        total_fe += loss_fe.item() * batch_size
 
-        pred_metrics = compute_mre_and_sdr(out["fine_mu"], coords, metas, DEFAULT_THRESHOLDS_MM)
+        pred_metrics = compute_mre_and_sdr(out[pred_key], coords, metas, DEFAULT_THRESHOLDS_MM)
         sum_mre_mm += pred_metrics["sum_mre_mm"]
         sum_mre_px += pred_metrics["sum_mre_px"]
         total_points += pred_metrics["num_points"]
@@ -242,6 +399,17 @@ def main() -> None:
             normalize=args.normalize,
             default_pixel_size_mm=args.pixel_size_mm,
         )
+    elif args.dataset == "isbi2015":
+        train_loader, val_loader = create_isbi2015_dataloaders(
+            dataset_root=args.dataset_root,
+            batch_size=args.batch_size,
+            num_workers=args.num_workers,
+            image_size=args.image_size,
+            heatmap_sigma=args.heatmap_sigma,
+            augment_train=not args.no_augment,
+            normalize=args.normalize,
+            default_pixel_size_mm=args.pixel_size_mm,
+        )
     else:
         train_loader, val_loader = create_aariz_dataloaders(
             dataset_root=args.dataset_root,
@@ -255,23 +423,41 @@ def main() -> None:
             preresized=args.preresized,
         )
 
+    num_finetune_layers = max(1, args.num_finetune_layers)
     model = build_dcelr(
         num_landmarks=train_loader.dataset.num_landmarks,
         in_channels=1,
         backbone=args.backbone,
+        num_layers_finetune=num_finetune_layers,
+        use_fpn_refine=args.fpn_refine,
+        fpn_dim=args.fpn_dim,
+        fpn_refine_level=args.fpn_refine_level,
+        use_patch_refine=args.patch_refine,
+        patch_size=args.patch_size,
+        patch_radius=args.patch_radius,
+        use_hr_heatmap_refine=args.hr_heatmap_refine,
     ).to(device)
+
+    if args.freeze_backbone:
+        for param in model.backbone.parameters():
+            param.requires_grad = False
+        print("Frozen model.backbone parameters.")
 
     resume_checkpoint = None
     if args.resume is not None:
         ckpt = torch.load(args.resume, map_location=device, weights_only=False)
         resume_checkpoint = ckpt
         state_dict = ckpt.get("state_dict", ckpt)
+        state_dict, skipped = compatible_state_dict(model, state_dict)
         missing, unexpected = model.load_state_dict(state_dict, strict=False)
-        print(f"Resumed weights from {args.resume} (missing={len(missing)}, unexpected={len(unexpected)}).")
+        print(
+            f"Resumed weights from {args.resume} "
+            f"(missing={len(missing)}, unexpected={len(unexpected)}, skipped_shape_mismatch={skipped})."
+        )
         if "val_metrics" in ckpt:
             print(f"Checkpoint val_metrics: {ckpt['val_metrics']}")
 
-    optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+    optimizer = AdamW((p for p in model.parameters() if p.requires_grad), lr=args.lr, weight_decay=args.weight_decay)
     steps_per_epoch = args.max_train_steps or len(train_loader)
     if args.scheduler == "onecycle":
         scheduler = OneCycleLR(
@@ -292,10 +478,27 @@ def main() -> None:
     else:
         scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lambda _step: 1.0)
 
+    model_config = {
+        "num_landmarks": train_loader.dataset.num_landmarks,
+        "in_channels": 1,
+        "backbone": args.backbone,
+        "num_layers_finetune": num_finetune_layers,
+        "use_fpn_refine": args.fpn_refine,
+        "fpn_dim": args.fpn_dim,
+        "fpn_refine_level": args.fpn_refine_level,
+        "use_patch_refine": args.patch_refine,
+        "patch_size": args.patch_size,
+        "patch_radius": args.patch_radius,
+        "use_hr_heatmap_refine": args.hr_heatmap_refine,
+    }
+
     best_mre = float("inf")
     if resume_checkpoint is not None and "val_metrics" in resume_checkpoint:
-        best_mre = resume_checkpoint["val_metrics"].get("mre_mm", best_mre)
-        torch.save(resume_checkpoint, args.output_dir / "best_model.pt")
+        resume_config = resume_checkpoint.get("model_config")
+        same_architecture = resume_config == model_config
+        best_mre = resume_checkpoint["val_metrics"].get("mre_mm", best_mre) if same_architecture else float("inf")
+        if same_architecture:
+            torch.save(resume_checkpoint, args.output_dir / "best_model.pt")
     for epoch in range(1, args.epochs + 1):
         start_time = time.time()
         train_metrics = train_one_epoch(
@@ -304,12 +507,14 @@ def main() -> None:
             optimizer,
             scheduler,
             device,
+            args,
             max_steps=args.max_train_steps,
         )
         val_metrics = evaluate(
             model,
             val_loader,
             device,
+            args,
             max_steps=args.max_val_steps,
         )
         elapsed = time.time() - start_time
@@ -337,6 +542,7 @@ def main() -> None:
                 "state_dict": model.state_dict(),
                 "optimizer": optimizer.state_dict(),
                 "val_metrics": val_metrics,
+                "model_config": model_config,
             }
             torch.save(best_state, args.output_dir / "best_model.pt")
 
