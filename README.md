@@ -3,7 +3,7 @@
 A PyTorch implementation of the **DeLR (Dual-encoder Landmark Regression)** architecture for cephalometric landmark detection, evaluated on three public datasets:
 
 - **Aariz Cephalograms** — 1000 images, 29 annotated landmarks (700 / 150 / 150 train/valid/test).
-- **CephAdoAdu Dataset** — 700 images, 10 landmarks, mixed adolescent + adult cohort (400 train / 300 test in the official splits; we held out 10 % of train as validation).
+- **CephAdoAdu Dataset** — 700 images, 10 landmarks, mixed adolescent + adult cohort (the public release contains the official 400-image training part and 300-image validation part; the 300 validation images are our held-out evaluation set and are listed under the `test` key of `final_splits.json`; 10 % of the training part is held out for model selection).
 - **ISBI 2015 Cephalometric Challenge** — 400 images, 19 landmarks (150 train / 150 Test1 / 100 Test2). Pixel size 0.1 mm/px, taken directly from the official evaluator (`EvaluationCode/v2_eva_code.m`).
 
 ## Pretrained checkpoints
@@ -56,29 +56,31 @@ After download, the checkpoints land in `checkpoints/<DATASET>/best_model.pt` �
 
 ## Results
 
-All numbers are on the **held-out test split**. Training: ConvNeXtV2-tiny backbone, input 1024×1024, batch 2 (T4 16 GB), augmentations on, AdamW + grad-clip 1.0.
+All numbers are on images **never used for training or model selection**. Training: ConvNeXtV2-tiny backbone, input 1024×1024, batch 2 (T4 16 GB), augmentations on, AdamW + grad-clip 1.0. 95 % confidence intervals, per-landmark tables and the adolescent/adult comparison are in `results/manuscript_metrics/` (regenerate with `evaluate_manuscript_metrics.py`).
 
-### CephAdoAdu (10 landmarks, 300 test images)
+### CephAdoAdu (10 landmarks, 300 images of the official validation part)
 
-| Metric | Value |
-|---|---|
-| MRE | **1.045 mm** (10.45 px) |
-| SDR @ 2.0 mm | 87.53 % |
-| SDR @ 2.5 mm | 92.37 % |
-| SDR @ 3.0 mm | 95.27 % |
-| SDR @ 4.0 mm | 97.63 % |
+| Metric | All (n = 300) | Adolescent (n = 150) | Adult (n = 150) |
+|---|---:|---:|---:|
+| MRE | **1.010 mm** | 0.972 mm | 1.049 mm |
+| SDR @ 2.0 mm | 89.67 % | 91.27 % | 88.07 % |
+| SDR @ 2.5 mm | 94.00 % | 94.67 % | 93.33 % |
+| SDR @ 3.0 mm | 96.27 % | 96.20 % | 96.33 % |
+| SDR @ 4.0 mm | 98.53 % | 98.40 % | 98.67 % |
+
+Millimetres follow the official CeLDA evaluation code (`code/test.py`): coordinates are mapped to the image rescaled to a longest side of 2048 px and 0.1 mm/px is applied. The dataset ships no physical spacing and image sizes vary from about 600 to 3550 px, so the values that `train.py` / `infer.py` print (0.1 mm per *original* pixel: MRE 1.045 mm, SDR 87.53 / 92.37 / 95.27 / 97.63 %) are not comparable with published CephAdoAdu results.
 
 ### Aariz (26 landmarks, 150 test images)
 
-| Metric | Value |
-|---|---|
-| MRE | **1.073 mm** (validation; 200-epoch reference run) |
-| SDR @ 2.0 mm | 87.0 % |
-| SDR @ 2.5 mm | 92.1 % |
-| SDR @ 3.0 mm | 94.8 % |
-| SDR @ 4.0 mm | 97.2 % |
+| Metric | Test | Validation (200-epoch reference run) |
+|---|---:|---:|
+| MRE | **1.105 mm** | 1.073 mm |
+| SDR @ 2.0 mm | 86.85 % | 87.0 % |
+| SDR @ 2.5 mm | 90.95 % | 92.1 % |
+| SDR @ 3.0 mm | 93.90 % | 94.8 % |
+| SDR @ 4.0 mm | 96.74 % | 97.2 % |
 
-Pixel size is per-image from `cephalogram_machine_mappings.csv`.
+Pixel size is per-image from `cephalogram_machine_mappings.csv`. The 26 landmarks are the first 26 of the 29 annotated ones (soft-tissue nasion, soft-tissue pogonion and subnasale are excluded).
 
 ### ISBI 2015 (19 landmarks)
 
