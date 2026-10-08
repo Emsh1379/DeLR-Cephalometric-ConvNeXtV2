@@ -99,7 +99,7 @@ Per-phase best validation MRE (Test1 used as val during training):
 | 2 | 200 ep constant lr=5e-5 | 1.132 mm | −0.056 mm |
 | 3 | 128 ep cosine 5e-5 → 1e-6 | **1.124 mm** | −0.008 mm |
 
-**Why Test2 is harder** — Test2 (301–400) was the blind ranking set in the 2015 challenge and is drawn from a more demographically diverse cohort. Test1 was used here for in-training model selection so the ~0.34 mm Test1↔Test2 gap also reflects implicit tuning to Test1; this is the same pattern reported across published ISBI-2015 leaderboards.
+**Why Test2 is harder** — Test2 (301–400) was the blind ranking set in the 2015 challenge and the gap is concentrated in a few landmarks (soft-tissue pogonion 1.12 → 4.63 mm, B point 1.12 → 2.52 mm, upper lip 1.22 → 2.59 mm, lower lip 0.87 → 2.04 mm, orbitale 1.28 → 2.26 mm; see `results/manuscript_metrics/per_landmark_isbi2015_test*.csv`), consistent with annotation differences in those landmarks rather than a general loss of accuracy. Test1 was used here for in-training model selection so the ~0.34 mm Test1↔Test2 gap also reflects implicit tuning to Test1; this is the same pattern reported across published ISBI-2015 leaderboards.
 
 #### Ablations on ISBI 2015 (150 ep OneCycle each, otherwise identical)
 
@@ -294,4 +294,4 @@ If this work helps your research, please cite the original DeLR / D-CeLR paper a
 
 ## License
 
-See repository licence file (or add one before publishing).
+Released under the [MIT License](LICENSE).
