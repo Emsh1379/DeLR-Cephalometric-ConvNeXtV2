@@ -49,6 +49,12 @@ ISBI_LANDMARKS = [
 # --------------------------------------------------------------------------- #
 # Ground-truth loaders (mirror delr/datasets.py)
 # --------------------------------------------------------------------------- #
+# Test images whose labrale inferius (index 24) and labrale superius (index 25)
+# labels are interchanged in both the junior and senior annotation files: the
+# reference upper lip lies below the lower lip. They are exchanged back on load.
+AARIZ_SWAPPED_LIPS = {"cl5lg05un01hm074k3dwy9l5q"}
+
+
 def load_aariz_gt(root: Path, split: str = "test", num_landmarks: int = 26):
     base = root / split / "Annotations" / "Cephalometric Landmarks"
     pixel_size: Dict[str, float] = {}
@@ -64,6 +70,8 @@ def load_aariz_gt(root: Path, split: str = "test", num_landmarks: int = 26):
         j = np.array([[p["value"]["x"], p["value"]["y"]] for p in junior], dtype=np.float32)
         s = np.array([[p["value"]["x"], p["value"]["y"]] for p in senior], dtype=np.float32)
         gt[stem] = ((j + s) * 0.5)[:num_landmarks].astype(np.float64)
+        if stem in AARIZ_SWAPPED_LIPS and num_landmarks >= 26:
+            gt[stem][[24, 25]] = gt[stem][[25, 24]]
         px[stem] = pixel_size[stem]
         if names is None:
             names = [p["title"] for p in junior][:num_landmarks]
