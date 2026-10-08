@@ -1,0 +1,12 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+Saved predictions to outputs/isbi3p_seed2/phase2/test1_predictions.json
+MRE(mm): 1.122 | MRE(px): 11.217
+SDR: 86.91%@2.0mm / 92.88%@2.5mm / 95.65%@3.0mm / 98.42%@4.0mm
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+Saved predictions to outputs/isbi3p_seed2/phase2/test2_predictions.json
+MRE(mm): 1.482 | MRE(px): 14.822
+SDR: 75.63%@2.0mm / 82.42%@2.5mm / 88.68%@3.0mm / 94.42%@4.0mm

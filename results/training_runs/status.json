@@ -1,0 +1,60 @@
+{
+ "ablation_full150": {
+  "epochs_done": 150,
+  "epochs_total": 150,
+  "last_val_mre": 1.196,
+  "best_val_mre": 1.18,
+  "best_epoch": 139,
+  "best_val_sdr": "85.8/91.7/95.3/98.1",
+  "sec_per_epoch": 102.8,
+  "training_process_alive": false,
+  "traceback_in_log": false,
+  "test1": {
+   "n": 150,
+   "mre_mm": 1.1797854845946272,
+   "sdr_2.0": 85.78947368421052,
+   "sdr_2.5": 91.71929824561403,
+   "sdr_3.0": 95.26315789473684,
+   "sdr_4.0": 98.14035087719299
+  },
+  "test2": {
+   "n": 100,
+   "mre_mm": 1.5711782676606967,
+   "sdr_2.0": 74.1578947368421,
+   "sdr_2.5": 82.15789473684211,
+   "sdr_3.0": 87.8421052631579,
+   "sdr_4.0": 95.15789473684211
+  },
+  "finished": true
+ },
+ "isbi_phase1_seed1": {
+  "epochs_done": 200,
+  "epochs_total": 200,
+  "last_val_mre": 1.381,
+  "best_val_mre": 1.36,
+  "best_epoch": 188,
+  "best_val_sdr": "80.8/88.4/93.2/97.1",
+  "sec_per_epoch": 112.8,
+  "training_process_alive": false,
+  "traceback_in_log": false,
+  "test1": {
+   "n": 150,
+   "mre_mm": 1.3599864785119864,
+   "sdr_2.0": 80.84210526315789,
+   "sdr_2.5": 88.42105263157895,
+   "sdr_3.0": 93.22807017543859,
+   "sdr_4.0": 97.12280701754385
+  },
+  "test2": {
+   "n": 100,
+   "mre_mm": 1.6571657232826578,
+   "sdr_2.0": 69.0,
+   "sdr_2.5": 78.94736842105263,
+   "sdr_3.0": 86.26315789473684,
+   "sdr_4.0": 94.36842105263158
+  },
+  "finished": true
+ },
+ "_last_check": "2026-10-06 07:25",
+ "_session": "ok"
+}
