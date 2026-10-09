@@ -74,13 +74,13 @@ Millimetres follow the official CeLDA evaluation code (`code/test.py`): coordina
 
 | Metric | Test | Validation (200-epoch reference run) |
 |---|---:|---:|
-| MRE | **1.105 mm** | 1.073 mm |
-| SDR @ 2.0 mm | 86.85 % | 87.0 % |
-| SDR @ 2.5 mm | 90.95 % | 92.1 % |
-| SDR @ 3.0 mm | 93.90 % | 94.8 % |
-| SDR @ 4.0 mm | 96.74 % | 97.2 % |
+| MRE | **1.097 mm** | 1.073 mm |
+| SDR @ 2.0 mm | 86.90 % | 87.0 % |
+| SDR @ 2.5 mm | 91.00 % | 92.1 % |
+| SDR @ 3.0 mm | 93.95 % | 94.8 % |
+| SDR @ 4.0 mm | 96.79 % | 97.2 % |
 
-Pixel size is per-image from `cephalogram_machine_mappings.csv`. The 26 landmarks are the first 26 of the 29 annotated ones (soft-tissue nasion, soft-tissue pogonion and subnasale are excluded).
+Pixel size is per-image from `cephalogram_machine_mappings.csv`. The 26 landmarks are the first 26 of the 29 annotated ones (soft-tissue nasion, soft-tissue pogonion and subnasale are excluded). In test image `cl5lg05un01hm074k3dwy9l5q` the labrale superius and labrale inferius labels are interchanged in both annotators' files (the reference upper lip lies below the lower lip); `evaluate_manuscript_metrics.py` exchanges them back before scoring. With the official labels the test MRE is 1.105 mm (SDR 86.85 / 90.95 / 93.90 / 96.74 %), which is what the files currently stored in `results/manuscript_metrics/` reflect.
 
 ### ISBI 2015 (19 landmarks)
 
