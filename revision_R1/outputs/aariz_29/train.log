@@ -1,0 +1,8 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+seed=42 backbone_amp=True
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/train_fast.py:335: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+Epoch 01/200 | Train loss: 146.7451 (hm=0.8351, re=14.6367, fe=131.2733) | Val loss: 39.3334 (hm=0.4420, re=7.7833, fe=31.1080) | Val MRE(mm): 166.137 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 239.9s
+Epoch 02/200 | Train loss: 39.1583 (hm=0.4126, re=7.7518, fe=30.9939) | Val loss: 39.1517 (hm=0.3951, re=7.7614, fe=30.9952) | Val MRE(mm): 161.223 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 228.3s

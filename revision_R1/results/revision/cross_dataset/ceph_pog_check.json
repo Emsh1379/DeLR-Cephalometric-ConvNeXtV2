@@ -1,0 +1,23 @@
+{
+  "bony pogonion (ISBI #7)": {
+    "mean_mm": 11.002289966057935,
+    "median_mm": 10.629808263380395,
+    "within_2mm_pct": 0.6666666666666667
+  },
+  "soft-tissue pogonion (ISBI #16)": {
+    "mean_mm": 4.747901737206393,
+    "median_mm": 4.11512761646744,
+    "within_2mm_pct": 6.666666666666667
+  },
+  "gnathion (ISBI #9)": {
+    "mean_mm": 13.444945651574102,
+    "median_mm": 13.019393235490153,
+    "within_2mm_pct": 0.6666666666666667
+  },
+  "menton (ISBI #8)": {
+    "mean_mm": 17.359676190901187,
+    "median_mm": 16.98692682372945,
+    "within_2mm_pct": 0.0
+  },
+  "horizontal_offset_vs_bony_mm": 10.310813413766367
+}

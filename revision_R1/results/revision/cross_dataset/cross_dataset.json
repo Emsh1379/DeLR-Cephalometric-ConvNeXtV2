@@ -1,0 +1,626 @@
+{
+  "isbi->aariz": {
+    "shared_landmarks": [
+      "a_point",
+      "ans",
+      "b_point",
+      "menton",
+      "nasion",
+      "orbitale",
+      "pogonion",
+      "pns",
+      "sella",
+      "articulare",
+      "gnathion",
+      "gonion",
+      "porion",
+      "lower_incisor_tip",
+      "upper_incisor_tip",
+      "lower_lip",
+      "upper_lip"
+    ],
+    "cross": {
+      "n_images": 150,
+      "n_landmarks": 17,
+      "mre_mm": 3.590002133129945,
+      "sd_mm": 10.107685243004841,
+      "median_mm": 1.252305318036743,
+      "sdr_2.0": 67.45098039215686,
+      "sdr_2.5": 74.58823529411764,
+      "sdr_3.0": 80.03921568627452,
+      "sdr_4.0": 86.07843137254902,
+      "mre_ci_lo": 2.9654181838668485,
+      "mre_ci_hi": 4.274459584378319,
+      "sdr_2.0_ci_lo": 64.11764705882354,
+      "sdr_2.0_ci_hi": 70.7843137254902
+    },
+    "in_domain": {
+      "n_images": 150,
+      "n_landmarks": 17,
+      "mre_mm": 0.9595233162445471,
+      "sd_mm": 1.1919167542353963,
+      "median_mm": 0.6420265574057227,
+      "sdr_2.0": 90.31372549019608,
+      "sdr_2.5": 93.45098039215686,
+      "sdr_3.0": 95.49019607843138,
+      "sdr_4.0": 97.72549019607844,
+      "mre_ci_lo": 0.8767705703895813,
+      "mre_ci_hi": 1.045997028466465,
+      "sdr_2.0_ci_lo": 88.66666666666667,
+      "sdr_2.0_ci_hi": 91.96078431372548
+    },
+    "per_landmark": {
+      "a_point": {
+        "in_domain_mre": 0.8737201396014308,
+        "cross_mre": 3.566342288605201,
+        "cross_sdr2": 35.333333333333336
+      },
+      "ans": {
+        "in_domain_mre": 1.2144684311327913,
+        "cross_mre": 2.2677699189407594,
+        "cross_sdr2": 52.666666666666664
+      },
+      "b_point": {
+        "in_domain_mre": 0.8343615976241125,
+        "cross_mre": 1.9724737884714667,
+        "cross_sdr2": 64.66666666666666
+      },
+      "menton": {
+        "in_domain_mre": 0.4857046518084669,
+        "cross_mre": 0.8240285223076689,
+        "cross_sdr2": 90.66666666666666
+      },
+      "nasion": {
+        "in_domain_mre": 0.8589239235532078,
+        "cross_mre": 1.860524476159312,
+        "cross_sdr2": 64.66666666666666
+      },
+      "orbitale": {
+        "in_domain_mre": 1.2915633144404983,
+        "cross_mre": 3.1194626393317004,
+        "cross_sdr2": 50.66666666666667
+      },
+      "pogonion": {
+        "in_domain_mre": 0.553492695325599,
+        "cross_mre": 1.2302547470331728,
+        "cross_sdr2": 83.33333333333334
+      },
+      "pns": {
+        "in_domain_mre": 1.4117707965599418,
+        "cross_mre": 2.6716680653241816,
+        "cross_sdr2": 64.0
+      },
+      "sella": {
+        "in_domain_mre": 0.6306202706624646,
+        "cross_mre": 2.7188396639174046,
+        "cross_sdr2": 87.33333333333333
+      },
+      "articulare": {
+        "in_domain_mre": 1.5769050624999288,
+        "cross_mre": 10.444151915682658,
+        "cross_sdr2": 51.33333333333333
+      },
+      "gnathion": {
+        "in_domain_mre": 0.4136762444694328,
+        "cross_mre": 0.7599779549390258,
+        "cross_sdr2": 98.0
+      },
+      "gonion": {
+        "in_domain_mre": 1.4734728355984523,
+        "cross_mre": 8.575323841408629,
+        "cross_sdr2": 54.666666666666664
+      },
+      "porion": {
+        "in_domain_mre": 1.5515567236314514,
+        "cross_mre": 14.722494773297246,
+        "cross_sdr2": 38.0
+      },
+      "lower_incisor_tip": {
+        "in_domain_mre": 0.72630005180554,
+        "cross_mre": 1.1553178941204953,
+        "cross_sdr2": 87.33333333333333
+      },
+      "upper_incisor_tip": {
+        "in_domain_mre": 0.5767044418835384,
+        "cross_mre": 1.0724279600653635,
+        "cross_sdr2": 88.0
+      },
+      "lower_lip": {
+        "in_domain_mre": 1.0969415588893863,
+        "cross_mre": 2.8890748280293783,
+        "cross_sdr2": 48.0
+      },
+      "upper_lip": {
+        "in_domain_mre": 0.7417136366710589,
+        "cross_mre": 1.1799029855753986,
+        "cross_sdr2": 88.0
+      }
+    }
+  },
+  "ceph->aariz": {
+    "shared_landmarks": [
+      "a_point",
+      "ans",
+      "orbitale",
+      "pogonion",
+      "porion",
+      "lower_incisor_tip",
+      "upper_incisor_apex",
+      "upper_incisor_tip",
+      "lower_incisor_apex"
+    ],
+    "cross": {
+      "n_images": 150,
+      "n_landmarks": 9,
+      "mre_mm": 2.7476950770669815,
+      "sd_mm": 3.6729272996086086,
+      "median_mm": 1.4809572615622832,
+      "sdr_2.0": 60.14814814814815,
+      "sdr_2.5": 69.11111111111111,
+      "sdr_3.0": 75.18518518518519,
+      "sdr_4.0": 83.4074074074074,
+      "mre_ci_lo": 2.5648400645405705,
+      "mre_ci_hi": 2.9373281006886525,
+      "sdr_2.0_ci_lo": 56.888888888888886,
+      "sdr_2.0_ci_hi": 63.33333333333333
+    },
+    "in_domain": {
+      "n_images": 150,
+      "n_landmarks": 9,
+      "mre_mm": 1.036845001670162,
+      "sd_mm": 1.026225957959172,
+      "median_mm": 0.7377141185552067,
+      "sdr_2.0": 87.55555555555556,
+      "sdr_2.5": 92.2962962962963,
+      "sdr_3.0": 95.18518518518519,
+      "sdr_4.0": 98.07407407407408,
+      "mre_ci_lo": 0.9567767087772823,
+      "mre_ci_hi": 1.1193681377943139,
+      "sdr_2.0_ci_lo": 85.25925925925925,
+      "sdr_2.0_ci_hi": 89.77777777777777
+    },
+    "per_landmark": {
+      "a_point": {
+        "in_domain_mre": 0.8737201396014308,
+        "cross_mre": 1.6546455318381603,
+        "cross_sdr2": 64.66666666666666
+      },
+      "ans": {
+        "in_domain_mre": 1.2144684311327913,
+        "cross_mre": 2.234117429390614,
+        "cross_sdr2": 54.666666666666664
+      },
+      "orbitale": {
+        "in_domain_mre": 1.2915633144404983,
+        "cross_mre": 1.394906777352447,
+        "cross_sdr2": 75.33333333333333
+      },
+      "pogonion": {
+        "in_domain_mre": 0.553492695325599,
+        "cross_mre": 11.161152396739826,
+        "cross_sdr2": 0.0
+      },
+      "porion": {
+        "in_domain_mre": 1.5515567236314514,
+        "cross_mre": 2.2684195952287634,
+        "cross_sdr2": 54.0
+      },
+      "lower_incisor_tip": {
+        "in_domain_mre": 0.72630005180554,
+        "cross_mre": 0.9696411851614865,
+        "cross_sdr2": 90.66666666666666
+      },
+      "upper_incisor_apex": {
+        "in_domain_mre": 1.153520686090752,
+        "cross_mre": 2.00565523883276,
+        "cross_sdr2": 59.333333333333336
+      },
+      "upper_incisor_tip": {
+        "in_domain_mre": 0.5767044418835384,
+        "cross_mre": 0.7537824189856969,
+        "cross_sdr2": 93.33333333333333
+      },
+      "lower_incisor_apex": {
+        "in_domain_mre": 1.390278531119856,
+        "cross_mre": 2.286935120073079,
+        "cross_sdr2": 49.333333333333336
+      }
+    }
+  },
+  "aariz->isbi": {
+    "shared_landmarks": [
+      "sella",
+      "nasion",
+      "orbitale",
+      "porion",
+      "a_point",
+      "b_point",
+      "pogonion",
+      "menton",
+      "gnathion",
+      "gonion",
+      "lower_incisor_tip",
+      "upper_incisor_tip",
+      "upper_lip",
+      "lower_lip",
+      "pns",
+      "ans",
+      "articulare"
+    ],
+    "cross": {
+      "n_images": 100,
+      "n_landmarks": 17,
+      "mre_mm": 1.7488679151678763,
+      "sd_mm": 1.5096023220427675,
+      "median_mm": 1.261868419938893,
+      "sdr_2.0": 68.0,
+      "sdr_2.5": 75.88235294117646,
+      "sdr_3.0": 82.23529411764706,
+      "sdr_4.0": 91.3529411764706,
+      "mre_ci_lo": 1.684263964994831,
+      "mre_ci_hi": 1.8126845059440033,
+      "sdr_2.0_ci_lo": 66.17647058823529,
+      "sdr_2.0_ci_hi": 69.82352941176471
+    },
+    "in_domain": {
+      "n_images": 100,
+      "n_landmarks": 17,
+      "mre_mm": 1.3066674615542548,
+      "sd_mm": 1.181294722436415,
+      "median_mm": 0.994376214899896,
+      "sdr_2.0": 77.8235294117647,
+      "sdr_2.5": 87.29411764705883,
+      "sdr_3.0": 92.94117647058823,
+      "sdr_4.0": 98.05882352941177,
+      "mre_ci_lo": 1.261376673105663,
+      "mre_ci_hi": 1.3555935659174738,
+      "sdr_2.0_ci_lo": 76.17647058823529,
+      "sdr_2.0_ci_hi": 79.47058823529412
+    },
+    "per_landmark": {
+      "sella": {
+        "in_domain_mre": 0.4793616366635895,
+        "cross_mre": 0.6694896579715612,
+        "cross_sdr2": 98.0
+      },
+      "nasion": {
+        "in_domain_mre": 0.9069471515458915,
+        "cross_mre": 2.6752472645134384,
+        "cross_sdr2": 48.0
+      },
+      "orbitale": {
+        "in_domain_mre": 2.2637947444381097,
+        "cross_mre": 1.5973809499260665,
+        "cross_sdr2": 74.0
+      },
+      "porion": {
+        "in_domain_mre": 1.9521643512913698,
+        "cross_mre": 1.940278066231989,
+        "cross_sdr2": 68.0
+      },
+      "a_point": {
+        "in_domain_mre": 1.2546435082926153,
+        "cross_mre": 2.7444072246887607,
+        "cross_sdr2": 23.0
+      },
+      "b_point": {
+        "in_domain_mre": 2.518722040130634,
+        "cross_mre": 1.2033544678331491,
+        "cross_sdr2": 87.0
+      },
+      "pogonion": {
+        "in_domain_mre": 0.6695596730175413,
+        "cross_mre": 1.083893940610297,
+        "cross_sdr2": 90.0
+      },
+      "menton": {
+        "in_domain_mre": 0.6606282649657577,
+        "cross_mre": 0.8991728619031966,
+        "cross_sdr2": 97.0
+      },
+      "gnathion": {
+        "in_domain_mre": 0.5314681345802115,
+        "cross_mre": 0.7686951053880644,
+        "cross_sdr2": 94.0
+      },
+      "gonion": {
+        "in_domain_mre": 1.2213465349248935,
+        "cross_mre": 1.599098299950792,
+        "cross_sdr2": 75.0
+      },
+      "lower_incisor_tip": {
+        "in_domain_mre": 0.9599205859109925,
+        "cross_mre": 1.3606050380708528,
+        "cross_sdr2": 81.0
+      },
+      "upper_incisor_tip": {
+        "in_domain_mre": 0.6566285734438831,
+        "cross_mre": 0.8371828804664567,
+        "cross_sdr2": 90.0
+      },
+      "upper_lip": {
+        "in_domain_mre": 2.591352319965056,
+        "cross_mre": 3.602316246950187,
+        "cross_sdr2": 2.0
+      },
+      "lower_lip": {
+        "in_domain_mre": 2.035161528220084,
+        "cross_mre": 4.220538062506385,
+        "cross_sdr2": 3.0
+      },
+      "pns": {
+        "in_domain_mre": 1.0304007036269656,
+        "cross_mre": 2.011941578418612,
+        "cross_sdr2": 56.00000000000001
+      },
+      "ans": {
+        "in_domain_mre": 1.3043913825656979,
+        "cross_mre": 1.2764969685531715,
+        "cross_sdr2": 85.0
+      },
+      "articulare": {
+        "in_domain_mre": 1.1768557128390382,
+        "cross_mre": 1.2406559438709146,
+        "cross_sdr2": 85.0
+      }
+    }
+  },
+  "ceph->isbi": {
+    "shared_landmarks": [
+      "orbitale",
+      "porion",
+      "a_point",
+      "pogonion",
+      "lower_incisor_tip",
+      "upper_incisor_tip",
+      "subnasale",
+      "ans"
+    ],
+    "cross": {
+      "n_images": 100,
+      "n_landmarks": 8,
+      "mre_mm": 2.6282131259821977,
+      "sd_mm": 3.5472576345579134,
+      "median_mm": 1.363977731551703,
+      "sdr_2.0": 69.25,
+      "sdr_2.5": 77.25,
+      "sdr_3.0": 81.875,
+      "sdr_4.0": 85.125,
+      "mre_ci_lo": 2.5468281584593693,
+      "mre_ci_hi": 2.7084663808533063,
+      "sdr_2.0_ci_lo": 67.0,
+      "sdr_2.0_ci_hi": 71.625
+    },
+    "in_domain": {
+      "n_images": 100,
+      "n_landmarks": 8,
+      "mre_mm": 1.2529158786167809,
+      "sd_mm": 1.300927223972604,
+      "median_mm": 0.9652385715743272,
+      "sdr_2.0": 82.5,
+      "sdr_2.5": 90.5,
+      "sdr_3.0": 94.5,
+      "sdr_4.0": 98.5,
+      "mre_ci_lo": 1.1778045512952742,
+      "mre_ci_hi": 1.3428611941600246,
+      "sdr_2.0_ci_lo": 80.25,
+      "sdr_2.0_ci_hi": 84.75
+    },
+    "per_landmark": {
+      "orbitale": {
+        "in_domain_mre": 2.2637947444381097,
+        "cross_mre": 1.3807352796724552,
+        "cross_sdr2": 80.0
+      },
+      "porion": {
+        "in_domain_mre": 1.9521643512913698,
+        "cross_mre": 1.736966285180462,
+        "cross_sdr2": 78.0
+      },
+      "a_point": {
+        "in_domain_mre": 1.2546435082926153,
+        "cross_mre": 2.137546131016485,
+        "cross_sdr2": 47.0
+      },
+      "pogonion": {
+        "in_domain_mre": 0.6695596730175413,
+        "cross_mre": 11.399874058040036,
+        "cross_sdr2": 0.0
+      },
+      "lower_incisor_tip": {
+        "in_domain_mre": 0.9599205859109925,
+        "cross_mre": 0.9253648839000391,
+        "cross_sdr2": 92.0
+      },
+      "upper_incisor_tip": {
+        "in_domain_mre": 0.6566285734438831,
+        "cross_mre": 0.6555706033560249,
+        "cross_sdr2": 96.0
+      },
+      "subnasale": {
+        "in_domain_mre": 0.9622242099740365,
+        "cross_mre": 1.4193685308215824,
+        "cross_sdr2": 79.0
+      },
+      "ans": {
+        "in_domain_mre": 1.3043913825656979,
+        "cross_mre": 1.370279235870497,
+        "cross_sdr2": 82.0
+      }
+    }
+  },
+  "aariz->ceph": {
+    "shared_landmarks": [
+      "a_point",
+      "ans",
+      "upper_incisor_tip",
+      "upper_incisor_apex",
+      "orbitale",
+      "porion",
+      "lower_incisor_tip",
+      "lower_incisor_apex",
+      "pogonion"
+    ],
+    "cross": {
+      "n_images": 300,
+      "n_landmarks": 9,
+      "mre_mm": 2.9564933701180216,
+      "sd_mm": 4.211612186774252,
+      "median_mm": 1.4134053002871128,
+      "sdr_2.0": 62.62962962962963,
+      "sdr_2.5": 69.92592592592592,
+      "sdr_3.0": 75.03703703703704,
+      "sdr_4.0": 81.5925925925926,
+      "mre_ci_lo": 2.6947458122910133,
+      "mre_ci_hi": 3.270490430822346,
+      "sdr_2.0_ci_lo": 60.77777777777777,
+      "sdr_2.0_ci_hi": 64.48148148148148
+    },
+    "in_domain": {
+      "n_images": 300,
+      "n_landmarks": 9,
+      "mre_mm": 1.0588896956421792,
+      "sd_mm": 0.9659333602658515,
+      "median_mm": 0.8062233440286732,
+      "sdr_2.0": 88.62962962962962,
+      "sdr_2.5": 93.4074074074074,
+      "sdr_3.0": 95.88888888888889,
+      "sdr_4.0": 98.4074074074074,
+      "mre_ci_lo": 1.0162747826579606,
+      "mre_ci_hi": 1.102810132479526,
+      "sdr_2.0_ci_lo": 87.2212962962963,
+      "sdr_2.0_ci_hi": 90.0
+    },
+    "per_landmark": {
+      "a_point": {
+        "in_domain_mre": 1.0470803234012969,
+        "cross_mre": 2.00588136366156,
+        "cross_sdr2": 75.33333333333333
+      },
+      "ans": {
+        "in_domain_mre": 0.8895299551874641,
+        "cross_mre": 2.068486111935289,
+        "cross_sdr2": 73.33333333333333
+      },
+      "upper_incisor_tip": {
+        "in_domain_mre": 0.5018910398217451,
+        "cross_mre": 1.1282422627798565,
+        "cross_sdr2": 92.33333333333333
+      },
+      "upper_incisor_apex": {
+        "in_domain_mre": 1.2827834826891824,
+        "cross_mre": 3.0451789846194086,
+        "cross_sdr2": 41.333333333333336
+      },
+      "orbitale": {
+        "in_domain_mre": 1.1682159023614667,
+        "cross_mre": 2.0521395040616675,
+        "cross_sdr2": 73.66666666666667
+      },
+      "porion": {
+        "in_domain_mre": 1.534000849687487,
+        "cross_mre": 1.7791704445182581,
+        "cross_sdr2": 71.0
+      },
+      "lower_incisor_tip": {
+        "in_domain_mre": 0.5984918069087254,
+        "cross_mre": 1.0612002759465913,
+        "cross_sdr2": 93.0
+      },
+      "lower_incisor_apex": {
+        "in_domain_mre": 1.3939219281054105,
+        "cross_mre": 2.751944277855402,
+        "cross_sdr2": 43.666666666666664
+      },
+      "pogonion": {
+        "in_domain_mre": 1.1140919726168341,
+        "cross_mre": 10.716197105684161,
+        "cross_sdr2": 0.0
+      }
+    }
+  },
+  "isbi->ceph": {
+    "shared_landmarks": [
+      "a_point",
+      "ans",
+      "upper_incisor_tip",
+      "orbitale",
+      "porion",
+      "lower_incisor_tip",
+      "subnasale",
+      "pogonion"
+    ],
+    "cross": {
+      "n_images": 300,
+      "n_landmarks": 8,
+      "mre_mm": 5.053352340217284,
+      "sd_mm": 9.275205269978729,
+      "median_mm": 1.6331729995900557,
+      "sdr_2.0": 57.54166666666667,
+      "sdr_2.5": 65.125,
+      "sdr_3.0": 69.5,
+      "sdr_4.0": 74.125,
+      "mre_ci_lo": 4.644264695220187,
+      "mre_ci_hi": 5.490242645249658,
+      "sdr_2.0_ci_lo": 55.125,
+      "sdr_2.0_ci_hi": 59.833333333333336
+    },
+    "in_domain": {
+      "n_images": 300,
+      "n_landmarks": 8,
+      "mre_mm": 0.9284970434147631,
+      "sd_mm": 0.8992148565763733,
+      "median_mm": 0.6748725152008748,
+      "sdr_2.0": 91.5,
+      "sdr_2.5": 95.29166666666666,
+      "sdr_3.0": 97.16666666666667,
+      "sdr_4.0": 98.79166666666667,
+      "mre_ci_lo": 0.8908093098818967,
+      "mre_ci_hi": 0.9671610571274496,
+      "sdr_2.0_ci_lo": 90.25,
+      "sdr_2.0_ci_hi": 92.66666666666666
+    },
+    "per_landmark": {
+      "a_point": {
+        "in_domain_mre": 1.0470803234012969,
+        "cross_mre": 3.497542489624461,
+        "cross_sdr2": 36.0
+      },
+      "ans": {
+        "in_domain_mre": 0.8895299551874641,
+        "cross_mre": 1.943091295542183,
+        "cross_sdr2": 74.33333333333333
+      },
+      "upper_incisor_tip": {
+        "in_domain_mre": 0.5018910398217451,
+        "cross_mre": 1.521959037162361,
+        "cross_sdr2": 86.33333333333333
+      },
+      "orbitale": {
+        "in_domain_mre": 1.1682159023614667,
+        "cross_mre": 2.5905826331851216,
+        "cross_sdr2": 67.33333333333333
+      },
+      "porion": {
+        "in_domain_mre": 1.534000849687487,
+        "cross_mre": 16.152996662800096,
+        "cross_sdr2": 32.0
+      },
+      "lower_incisor_tip": {
+        "in_domain_mre": 0.5984918069087254,
+        "cross_mre": 1.9427383462754673,
+        "cross_sdr2": 81.33333333333333
+      },
+      "subnasale": {
+        "in_domain_mre": 0.5746744973330855,
+        "cross_mre": 1.7756182910906493,
+        "cross_sdr2": 82.33333333333334
+      },
+      "pogonion": {
+        "in_domain_mre": 1.1140919726168341,
+        "cross_mre": 11.002289966057935,
+        "cross_sdr2": 0.6666666666666667
+      }
+    }
+  }
+}

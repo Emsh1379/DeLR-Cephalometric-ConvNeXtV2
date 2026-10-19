@@ -1,0 +1,25 @@
+# Predicted uncertainty: training vs held-out images, and recalibration
+
+sigma = exp(predicted log-scale) of the last refinement update, in mm (same pixel-to-mm factors as the error). Training rows use the first 150 training images (no augmentation).
+
+| Dataset | Split | Images | Mean error (mm) | Mean sigma (mm) | Mean error / mean sigma | Median error/sigma |
+|---|---|---|---|---|---|---|
+| Aariz | training | 150 | 0.155 | 0.190 | 0.82 | 0.71 |
+| Aariz | validation | 150 | 1.073 | 0.203 | 5.28 | 4.17 |
+| Aariz | test | 150 | 1.105 | 0.208 | 5.31 | 4.11 |
+| ISBI 2015 | training | 150 | 0.208 | 0.222 | 0.94 | 0.84 |
+| ISBI 2015 | validation | 150 | 1.124 | 0.247 | 4.55 | 4.02 |
+| ISBI 2015 | test | 100 | 1.463 | 0.228 | 6.43 | 4.89 |
+| CephAdoAdu | training | 150 | 0.151 | 0.196 | 0.77 | 0.69 |
+| CephAdoAdu | validation | 40 | 1.029 | 0.201 | 5.12 | 4.11 |
+| CephAdoAdu | test | 300 | 1.010 | 0.199 | 5.09 | 4.00 |
+
+## One-parameter recalibration (c chosen on validation images)
+
+Bound = c x sigma, with c the 90% quantile of error/sigma on the validation images.
+
+| Dataset | c | Test coverage of raw sigma (%) | Validation coverage (%) | Test coverage (%) | Median bound on test (mm) | 90th percentile of bound (mm) |
+|---|---|---|---|---|---|---|
+| Aariz | 10.12 | 4.9 | 90.0 | 90.4 | 1.82 | 3.34 |
+| ISBI 2015 | 10.34 | 5.1 | 90.0 | 78.3 | 2.21 | 2.93 |
+| CephAdoAdu | 9.96 | 6.4 | 90.0 | 90.5 | 1.86 | 2.59 |

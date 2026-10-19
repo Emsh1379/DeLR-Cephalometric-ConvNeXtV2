@@ -1,0 +1,71 @@
+{
+  "Aariz": {
+    "training": {
+      "mean_error": 0.15531623306548767,
+      "mean_sigma": 0.1895493178112878,
+      "ratio": 0.8193974784974851
+    },
+    "validation": {
+      "mean_error": 1.0733293775010082,
+      "mean_sigma": 0.20345665744686886,
+      "ratio": 5.2754694339815345
+    },
+    "test": {
+      "mean_error": 1.1050807059785654,
+      "mean_sigma": 0.20830412560879583,
+      "ratio": 5.305131152581946
+    },
+    "calibration": {
+      "c": 10.122597993487975,
+      "raw_test_coverage": 4.871794871794872,
+      "val_coverage": 90.0,
+      "test_coverage": 90.38461538461539
+    }
+  },
+  "ISBI 2015": {
+    "training": {
+      "mean_error": 0.20822713474703194,
+      "mean_sigma": 0.22194864870622288,
+      "ratio": 0.9381770781702163
+    },
+    "validation": {
+      "mean_error": 1.1238083982897271,
+      "mean_sigma": 0.24696183340982727,
+      "ratio": 4.550534723415313
+    },
+    "test": {
+      "mean_error": 1.4631952593261102,
+      "mean_sigma": 0.22753543570347207,
+      "ratio": 6.430625870657661
+    },
+    "calibration": {
+      "c": 10.336961451364996,
+      "raw_test_coverage": 5.105263157894737,
+      "val_coverage": 90.0,
+      "test_coverage": 78.3157894736842
+    }
+  },
+  "CephAdoAdu": {
+    "training": {
+      "mean_error": 0.15054437529103587,
+      "mean_sigma": 0.19599822205320924,
+      "ratio": 0.7680905148729684
+    },
+    "validation": {
+      "mean_error": 1.028719173413612,
+      "mean_sigma": 0.2009316193503671,
+      "ratio": 5.119747587460692
+    },
+    "test": {
+      "mean_error": 1.010468240146293,
+      "mean_sigma": 0.1987121378938977,
+      "ratio": 5.085085646282122
+    },
+    "calibration": {
+      "c": 9.958463980857529,
+      "raw_test_coverage": 6.366666666666666,
+      "val_coverage": 90.0,
+      "test_coverage": 90.46666666666667
+    }
+  }
+}

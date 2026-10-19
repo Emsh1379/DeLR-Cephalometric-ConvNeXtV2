@@ -1,0 +1,2187 @@
+{
+  "A_tost": {
+    "n_adolescent": 150,
+    "n_adult": 150,
+    "diff_mm": -0.07713489799322515,
+    "ci90_welch": [
+      -0.1438879192168835,
+      -0.010381876769566825
+    ],
+    "ci95_welch": [
+      -0.15676009364540866,
+      0.0024902976589583764
+    ],
+    "ci90_boot": [
+      -0.14272145426970684,
+      -0.010201540187271447
+    ],
+    "ci95_boot": [
+      -0.1546486595678431,
+      0.004114630861811192
+    ],
+    "margins": {
+      "0.25": {
+        "p_lower": 1.3314185803414702e-05,
+        "p_upper": 1.0299898423519358e-14,
+        "p_tost": 1.3314185803414702e-05,
+        "equivalent": true
+      },
+      "0.5": {
+        "p_lower": 0.0,
+        "p_upper": 4.177466138374689e-35,
+        "p_tost": 4.177466138374689e-35,
+        "equivalent": true
+      }
+    },
+    "sdr2": {
+      "diff_pp": 3.200000000000003,
+      "ci90": [
+        1.065614074568046,
+        5.33438592543196
+      ]
+    }
+  },
+  "C_label_check": {
+    "per_split": [
+      [
+        "train",
+        700,
+        1,
+        1
+      ],
+      [
+        "valid",
+        150,
+        0,
+        0
+      ],
+      [
+        "test",
+        150,
+        1,
+        1
+      ]
+    ],
+    "lip_order_flagged": [
+      [
+        "train",
+        "cks2ip8g52b530yufc8z6edv8",
+        "ART Plus",
+        "yes",
+        "yes"
+      ],
+      [
+        "test",
+        "cl5lg05un01hm074k3dwy9l5q",
+        "ProMax with ProTouch",
+        "yes",
+        "yes"
+      ]
+    ],
+    "junior_senior_gt_mm": [
+      [
+        "train",
+        "cks2ip8fq29za0yuf0tqu1qjs",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "6.5"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a0j0yufdfssbc09",
+        "ART Plus",
+        "A-point",
+        "6.4"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a0j0yufdfssbc09",
+        "ART Plus",
+        "Orbitale",
+        "6.5"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a0j0yufdfssbc09",
+        "ART Plus",
+        "Ramus",
+        "6.2"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a0j0yufdfssbc09",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "6.3"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a0t0yufgab484s9",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "6.3"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a180yufh98ue4yo",
+        "ART Plus",
+        "Ramus",
+        "6.4"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a180yufh98ue4yo",
+        "ART Plus",
+        "Condylion",
+        "6.2"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a180yufh98ue4yo",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "5.2"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a180yufh98ue4yo",
+        "ART Plus",
+        "Soft Tissue Nasion",
+        "5.4"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a1i0yuf9ra939xh",
+        "ART Plus",
+        "Lower Incisor Tip",
+        "5.1"
+      ],
+      [
+        "train",
+        "cks2ip8fq2a1i0yuf9ra939xh",
+        "ART Plus",
+        "Lower Incisor Apex",
+        "5.2"
+      ],
+      [
+        "train",
+        "cks2ip8fr2a2h0yuf2r8o8teg",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "7.1"
+      ],
+      [
+        "train",
+        "cks2ip8fr2a2w0yuf49bu0v1w",
+        "ART Plus",
+        "Gonion",
+        "5.1"
+      ],
+      [
+        "train",
+        "cks2ip8fr2a4z0yufhpqa3onx",
+        "ART Plus",
+        "Condylion",
+        "5.6"
+      ],
+      [
+        "train",
+        "cks2ip8fs2a6i0yuf9ya2alpu",
+        "ART Plus",
+        "Orbitale",
+        "7.0"
+      ],
+      [
+        "train",
+        "cks2ip8fs2a6s0yuf82zxg497",
+        "ART Plus",
+        "Condylion",
+        "9.9"
+      ],
+      [
+        "train",
+        "cks2ip8fs2a6s0yuf82zxg497",
+        "ART Plus",
+        "Porion",
+        "7.4"
+      ],
+      [
+        "train",
+        "cks2ip8fs2a7c0yuf95snfwts",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "5.1"
+      ],
+      [
+        "train",
+        "cks2ip8fs2a8q0yuf4vtpb6uz",
+        "ART Plus",
+        "Porion",
+        "7.9"
+      ],
+      [
+        "train",
+        "cks2ip8ft2a950yuf7e2t5vc0",
+        "ART Plus",
+        "Anterior Nasal Spine",
+        "6.0"
+      ],
+      [
+        "train",
+        "cks2ip8ft2a950yuf7e2t5vc0",
+        "ART Plus",
+        "Orbitale",
+        "10.6"
+      ],
+      [
+        "train",
+        "cks2ip8ft2a9f0yufap5d8hw6",
+        "ART Plus",
+        "Soft Tissue Pogonion",
+        "6.4"
+      ],
+      [
+        "train",
+        "cks2ip8ft2ab80yuf2otndehg",
+        "ART Plus",
+        "Anterior Nasal Spine",
+        "5.2"
+      ],
+      [
+        "train",
+        "cks2ip8ft2ab80yuf2otndehg",
+        "ART Plus",
+        "Lower 2nd PM Cusp Tip",
+        "8.1"
+      ],
+      [
+        "train",
+        "cks2ip8ft2ab80yuf2otndehg",
+        "ART Plus",
+        "Lower Molar Cusp Tip",
+        "7.8"
+      ],
+      [
+        "train",
+        "cks2ip8ft2ab80yuf2otndehg",
+        "ART Plus",
+        "Upper Molar Cusp Tip",
+        "10.3"
+      ],
+      [
+        "train",
+        "cks2ip8ft2acc0yufdlzwb2kt",
+        "ART Plus",
+        "Orbitale",
+        "5.8"
+      ],
+      [
+        "train",
+        "cks2ip8ft2acc0yufdlzwb2kt",
+        "ART Plus",
+        "Porion",
+        "7.8"
+      ],
+      [
+        "train",
+        "cks2ip8fu2ach0yufcu3bh3ym",
+        "ART Plus",
+        "Condylion",
+        "8.4"
+      ],
+      [
+        "train",
+        "cks2ip8fw2adg0yuf1dzy9uwg",
+        "ART Plus",
+        "Ramus",
+        "6.8"
+      ],
+      [
+        "train",
+        "cks2ip8fw2adg0yuf1dzy9uwg",
+        "ART Plus",
+        "Articulare",
+        "6.2"
+      ],
+      [
+        "train",
+        "cks2ip8fw2adg0yuf1dzy9uwg",
+        "ART Plus",
+        "Gonion",
+        "6.2"
+      ],
+      [
+        "train",
+        "cks2ip8fw2adv0yuf2jxu9g4b",
+        "ART Plus",
+        "Condylion",
+        "5.2"
+      ],
+      [
+        "train",
+        "cks2ip8fw2ae00yuf9gr01f61",
+        "ART Plus",
+        "Orbitale",
+        "7.7"
+      ],
+      [
+        "train",
+        "cks2ip8fw2afe0yufhlhta6hy",
+        "ART Plus",
+        "Ramus",
+        "6.1"
+      ],
+      [
+        "train",
+        "cks2ip8fw2afe0yufhlhta6hy",
+        "ART Plus",
+        "Articulare",
+        "5.2"
+      ],
+      [
+        "train",
+        "cks2ip8fw2afe0yufhlhta6hy",
+        "ART Plus",
+        "Gonion",
+        "10.8"
+      ],
+      [
+        "train",
+        "cks2ip8fx2agd0yuf2rt9dbeq",
+        "ART Plus",
+        "Ramus",
+        "5.3"
+      ],
+      [
+        "train",
+        "cks2ip8fx2ags0yuf31g85zfn",
+        "ART Plus",
+        "Gonion",
+        "6.0"
+      ],
+      [
+        "train",
+        "cks2ip8fx2ahc0yuf6w8s49xa",
+        "ART Plus",
+        "Gonion",
+        "7.5"
+      ],
+      [
+        "train",
+        "cks2ip8fx2ahh0yuf8c2v1661",
+        "ART Plus",
+        "Gonion",
+        "6.7"
+      ],
+      [
+        "train",
+        "cks2ip8fx2ajk0yufdo4h88tp",
+        "ART Plus",
+        "Soft Tissue Nasion",
+        "6.3"
+      ],
+      [
+        "train",
+        "cks2ip8fy2ak40yufb4x13kzd",
+        "ART Plus",
+        "Gonion",
+        "5.7"
+      ],
+      [
+        "train",
+        "cks2ip8fy2ako0yuf19i62c44",
+        "ART Plus",
+        "Articulare",
+        "5.6"
+      ],
+      [
+        "train",
+        "cks2ip8fy2ako0yuf19i62c44",
+        "ART Plus",
+        "Condylion",
+        "6.2"
+      ],
+      [
+        "train",
+        "cks2ip8fy2aln0yuf410uemk2",
+        "ART Plus",
+        "Porion",
+        "6.4"
+      ],
+      [
+        "train",
+        "cks2ip8fz2anb0yufgh486oi2",
+        "ART Plus",
+        "Ramus",
+        "7.1"
+      ],
+      [
+        "train",
+        "cks2ip8fz2anb0yufgh486oi2",
+        "ART Plus",
+        "Gonion",
+        "11.4"
+      ],
+      [
+        "train",
+        "cks2ip8fz2aq30yufdbw5em62",
+        "ART Plus",
+        "Porion",
+        "11.4"
+      ],
+      [
+        "train",
+        "cks2ip8g02atz0yuf6ilzeb44",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "5.9"
+      ],
+      [
+        "train",
+        "cks2ip8g02atz0yuf6ilzeb44",
+        "ART Plus",
+        "Upper Incisor Tip",
+        "8.2"
+      ],
+      [
+        "train",
+        "cks2ip8g32avn0yuf78tdfdvs",
+        "ART Plus",
+        "Gonion",
+        "5.1"
+      ],
+      [
+        "train",
+        "cks2ip8g32awc0yuf3sif8n24",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "6.1"
+      ],
+      [
+        "train",
+        "cks2ip8g42az40yuf8atp1v5e",
+        "ART Plus",
+        "Lower Incisor Apex",
+        "5.5"
+      ],
+      [
+        "train",
+        "cks2ip8g42azy0yuf37k2cy1r",
+        "ART Plus",
+        "Soft Tissue Nasion",
+        "10.8"
+      ],
+      [
+        "train",
+        "cks2ip8g42b0n0yuf189ue1jo",
+        "ART Plus",
+        "Porion",
+        "11.1"
+      ],
+      [
+        "train",
+        "cks2ip8g52b1w0yuf7sju8s2a",
+        "ART Plus",
+        "Lower Molar Cusp Tip",
+        "5.8"
+      ],
+      [
+        "train",
+        "cks2ip8g52b1w0yuf7sju8s2a",
+        "ART Plus",
+        "Upper 2nd PM Cusp Tip",
+        "5.7"
+      ],
+      [
+        "train",
+        "cks2ip8g52b1w0yuf7sju8s2a",
+        "ART Plus",
+        "Upper Molar Cusp Tip",
+        "5.2"
+      ],
+      [
+        "train",
+        "cks2ip8g52b490yuf8bkv9zjd",
+        "ART Plus",
+        "Ramus",
+        "5.2"
+      ],
+      [
+        "train",
+        "cks2ip8g62b670yufdmwv2tou",
+        "ART Plus",
+        "Anterior Nasal Spine",
+        "5.3"
+      ],
+      [
+        "train",
+        "cks2ip8g62b7q0yufcezt50ch",
+        "ART Plus",
+        "Porion",
+        "8.2"
+      ],
+      [
+        "train",
+        "cks2ip8g62b7q0yufcezt50ch",
+        "ART Plus",
+        "Upper Incisor Tip",
+        "144.7"
+      ],
+      [
+        "train",
+        "cks2ip8g62b800yuf69qv95a0",
+        "ART Plus",
+        "Soft Tissue Nasion",
+        "8.2"
+      ],
+      [
+        "train",
+        "cks2ip8g72b9e0yuf1e3eawvo",
+        "ART Plus",
+        "Lower Incisor Tip",
+        "6.7"
+      ],
+      [
+        "train",
+        "cks2ip8g72b9y0yufbw0cexe3",
+        "ART Plus",
+        "Gonion",
+        "6.4"
+      ],
+      [
+        "train",
+        "cks2ip8g72b9y0yufbw0cexe3",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "5.8"
+      ],
+      [
+        "train",
+        "cks2ip8g72ban0yufbzx4gayq",
+        "ART Plus",
+        "Porion",
+        "7.3"
+      ],
+      [
+        "train",
+        "cks2sholl2eqb0yufea6q7sdl",
+        "ART Plus",
+        "Condylion",
+        "5.1"
+      ],
+      [
+        "train",
+        "cks7u9tyf5z5q0yto66uk3ypq",
+        "ART Plus",
+        "Nasion",
+        "5.6"
+      ],
+      [
+        "train",
+        "cks7u9tyf5z5q0yto66uk3ypq",
+        "ART Plus",
+        "Orbitale",
+        "6.3"
+      ],
+      [
+        "train",
+        "cks7u9tyf5z650yto53kefdn6",
+        "ART Plus",
+        "Orbitale",
+        "5.9"
+      ],
+      [
+        "train",
+        "cks7u9tyf5z650yto53kefdn6",
+        "ART Plus",
+        "Porion",
+        "7.2"
+      ],
+      [
+        "train",
+        "cks7u9tyg5z7o0ytobfcp6azv",
+        "ART Plus",
+        "Porion",
+        "8.3"
+      ],
+      [
+        "train",
+        "cks7u9tyg5z8x0ytofpw476cr",
+        "ART Plus",
+        "Orbitale",
+        "8.4"
+      ],
+      [
+        "train",
+        "cks7u9tyg5z8x0ytofpw476cr",
+        "ART Plus",
+        "Gonion",
+        "5.6"
+      ],
+      [
+        "train",
+        "cl5lc0isc127s072u4cdb7upo",
+        "ProMax 2D",
+        "Orbitale",
+        "7.0"
+      ],
+      [
+        "train",
+        "cl5lc0isd128s072ucfos30b1",
+        "ProMax 2D",
+        "Porion",
+        "5.6"
+      ],
+      [
+        "train",
+        "cl5lc0ise12b0072uc8bb44mc",
+        "ProMax 2D",
+        "Soft Tissue Nasion",
+        "6.1"
+      ],
+      [
+        "train",
+        "cl5lc0ise12bo072u2swr18v2",
+        "ProMax 2D",
+        "Soft Tissue Nasion",
+        "8.6"
+      ],
+      [
+        "train",
+        "cl5lg05uc016i074khfsn205u",
+        "ProMax with ProTouch",
+        "Nasion",
+        "10.2"
+      ],
+      [
+        "train",
+        "cl5lg05ud017e074k4xxj7kqr",
+        "ProMax with ProTouch",
+        "Nasion",
+        "6.8"
+      ],
+      [
+        "train",
+        "cl5lg05ud017i074kf2ht6vn8",
+        "ProMax with ProTouch",
+        "Ramus",
+        "5.6"
+      ],
+      [
+        "train",
+        "cl5lg05ud017i074kf2ht6vn8",
+        "ProMax with ProTouch",
+        "Porion",
+        "7.7"
+      ],
+      [
+        "train",
+        "cl5lg05uf019y074kdndp09li",
+        "ProMax with ProTouch",
+        "Ramus",
+        "5.9"
+      ],
+      [
+        "train",
+        "cl5lg05ug01ay074kbk1j4cu4",
+        "ProMax with ProTouch",
+        "Ramus",
+        "5.9"
+      ],
+      [
+        "train",
+        "cl5lg05uh01ce074k7fys3wvt",
+        "ProMax with ProTouch",
+        "Gonion",
+        "7.1"
+      ],
+      [
+        "train",
+        "cl5lg05uj01cq074k5ywdds14",
+        "ProMax with ProTouch",
+        "Ramus",
+        "5.7"
+      ],
+      [
+        "train",
+        "cl5lg05uj01cq074k5ywdds14",
+        "ProMax with ProTouch",
+        "Gonion",
+        "7.2"
+      ],
+      [
+        "train",
+        "cl5lg05uk01ea074kamsz9ccr",
+        "ProMax with ProTouch",
+        "Orbitale",
+        "5.2"
+      ],
+      [
+        "train",
+        "cl5lg05un01hq074k3k011hjm",
+        "ProMax with ProTouch",
+        "Upper Incisor Apex",
+        "6.4"
+      ],
+      [
+        "train",
+        "cl5lg05un01i6074k1t7t4xku",
+        "ProMax with ProTouch",
+        "Upper Incisor Tip",
+        "10.8"
+      ],
+      [
+        "train",
+        "cl5lg05uo01j2074k3h7cejmi",
+        "ProMax with ProTouch",
+        "Gonion",
+        "7.3"
+      ],
+      [
+        "train",
+        "cl5lg05up01ji074k6aoj8hlm",
+        "ProMax with ProTouch",
+        "Condylion",
+        "9.4"
+      ],
+      [
+        "train",
+        "cl5lg05ur01le074kb6dyhgeh",
+        "ProMax with ProTouch",
+        "Upper Incisor Apex",
+        "6.5"
+      ],
+      [
+        "train",
+        "cl5lg05ur01ly074k4bm89eu1",
+        "ProMax with ProTouch",
+        "Lower Incisor Apex",
+        "5.3"
+      ],
+      [
+        "train",
+        "cl6cc2n523zbz07717qo57shj",
+        "Hyperion X5",
+        "Porion",
+        "17.5"
+      ],
+      [
+        "train",
+        "cl6cc2n5g3zxr07717r7g6u7j",
+        "Veraviewepocs 2D",
+        "Porion",
+        "5.7"
+      ],
+      [
+        "train",
+        "cl6wmcdb33jg3078v41ej0e3h",
+        "Veraviewepocs 2D",
+        "Nasion",
+        "5.5"
+      ],
+      [
+        "train",
+        "cl6wmcdb73jij078v8m8kh0bw",
+        "Hyperion X5",
+        "Articulare",
+        "5.1"
+      ],
+      [
+        "train",
+        "cl6wmcdb73jiz078vf3v92ome",
+        "Hyperion X5",
+        "Porion",
+        "5.3"
+      ],
+      [
+        "train",
+        "cl6wmcdbc3jnn078v569t8xai",
+        "Hyperion X5",
+        "Lower Incisor Tip",
+        "8.0"
+      ],
+      [
+        "train",
+        "cl6yu68l20bv9075bbb2ebn3h",
+        "Hyperion X5",
+        "B-point",
+        "5.2"
+      ],
+      [
+        "train",
+        "cl76jfqya0e2d0761akeuavqb",
+        "Rotograph EVO",
+        "Ramus",
+        "8.1"
+      ],
+      [
+        "train",
+        "cl76jfqya0e2d0761akeuavqb",
+        "Rotograph EVO",
+        "Gonion",
+        "5.5"
+      ],
+      [
+        "train",
+        "cl76jfqya0e2d0761akeuavqb",
+        "Rotograph EVO",
+        "Soft Tissue Nasion",
+        "5.0"
+      ],
+      [
+        "train",
+        "cl76jfqyc0e2p0761e0yhc0d7",
+        "Rotograph EVO",
+        "Nasion",
+        "5.7"
+      ],
+      [
+        "train",
+        "cl76jfqyc0e2t076134cnfb7s",
+        "Rotograph EVO",
+        "Porion",
+        "5.9"
+      ],
+      [
+        "train",
+        "cl76jfqyc0e2x07610em2fb9f",
+        "Rotograph EVO",
+        "Anterior Nasal Spine",
+        "5.4"
+      ],
+      [
+        "train",
+        "cl76jfqyc0e2x07610em2fb9f",
+        "Rotograph EVO",
+        "Posterior Nasal Spine",
+        "7.6"
+      ],
+      [
+        "train",
+        "cl76jfqyc0e2x07610em2fb9f",
+        "Rotograph EVO",
+        "Lower 2nd PM Cusp Tip",
+        "137.5"
+      ],
+      [
+        "train",
+        "cl76jfqyd0e3d0761e5owdqb4",
+        "Rotograph EVO",
+        "Ramus",
+        "7.2"
+      ],
+      [
+        "train",
+        "cl76jfqyd0e3d0761e5owdqb4",
+        "Rotograph EVO",
+        "Gonion",
+        "10.9"
+      ],
+      [
+        "train",
+        "cl76jfqyd0e3h07610qnq1ok7",
+        "Rotograph EVO",
+        "Anterior Nasal Spine",
+        "5.1"
+      ],
+      [
+        "train",
+        "cl76jfqyd0e3h07610qnq1ok7",
+        "Rotograph EVO",
+        "Posterior Nasal Spine",
+        "7.0"
+      ],
+      [
+        "train",
+        "cl76jfqyd0e3p07615slb3pzs",
+        "Rotograph EVO",
+        "Nasion",
+        "9.0"
+      ],
+      [
+        "train",
+        "cl76jfqyd0e45076109u997ap",
+        "Rotograph EVO",
+        "Anterior Nasal Spine",
+        "8.0"
+      ],
+      [
+        "train",
+        "cl76jfqyd0e45076109u997ap",
+        "Rotograph EVO",
+        "Porion",
+        "9.5"
+      ],
+      [
+        "train",
+        "cl76jfqye0e4t0761hkrhbaaz",
+        "Rotograph EVO",
+        "Ramus",
+        "6.3"
+      ],
+      [
+        "train",
+        "cl76jfqye0e4t0761hkrhbaaz",
+        "Rotograph EVO",
+        "Gonion",
+        "7.3"
+      ],
+      [
+        "train",
+        "cl76jfqye0e4t0761hkrhbaaz",
+        "Rotograph EVO",
+        "Lower Incisor Apex",
+        "5.0"
+      ],
+      [
+        "train",
+        "cl76jfqye0e4t0761hkrhbaaz",
+        "Rotograph EVO",
+        "Labrale inferius",
+        "6.1"
+      ],
+      [
+        "train",
+        "cl76jfqye0e590761ehe8679d",
+        "Rotograph EVO",
+        "Condylion",
+        "7.3"
+      ],
+      [
+        "train",
+        "cl76jfqye0e590761ehe8679d",
+        "Rotograph EVO",
+        "Porion",
+        "11.7"
+      ],
+      [
+        "train",
+        "cl76jfqye0e5d0761hdwx8d97",
+        "Rotograph EVO",
+        "A-point",
+        "5.6"
+      ],
+      [
+        "train",
+        "cl76jfqye0e5h076122wx6tkd",
+        "Rotograph EVO",
+        "Orbitale",
+        "7.6"
+      ],
+      [
+        "train",
+        "cl76jfqye0e5l0761219a6e7l",
+        "Rotograph EVO",
+        "Gonion",
+        "8.1"
+      ],
+      [
+        "train",
+        "cl76jfqyf0e5t0761crbx5w5o",
+        "Rotograph EVO",
+        "B-point",
+        "5.0"
+      ],
+      [
+        "train",
+        "cl76jfqyf0e5t0761crbx5w5o",
+        "Rotograph EVO",
+        "Upper Incisor Apex",
+        "5.1"
+      ],
+      [
+        "train",
+        "cl76jfqyf0e5t0761crbx5w5o",
+        "Rotograph EVO",
+        "Soft Tissue Nasion",
+        "5.0"
+      ],
+      [
+        "train",
+        "cl774ufdr035i076wf9qnfj2t",
+        "Rotograph EVO",
+        "B-point",
+        "6.5"
+      ],
+      [
+        "train",
+        "cl777aklx03u6076w7sj1etfi",
+        "Rotograph EVO",
+        "Porion",
+        "11.4"
+      ],
+      [
+        "train",
+        "cl777aklx03um076w1gov5mqp",
+        "Rotograph EVO",
+        "Condylion",
+        "5.3"
+      ],
+      [
+        "train",
+        "cl7ww1jcl9cc8084ff07j78nl",
+        "Rotograph EVO",
+        "Anterior Nasal Spine",
+        "11.3"
+      ],
+      [
+        "train",
+        "cl7ww1jcl9cco084f5f1l57wz",
+        "Rotograph EVO",
+        "Menton",
+        "7.1"
+      ],
+      [
+        "train",
+        "cl7ww1jcl9cd0084f7hzj2eie",
+        "Rotograph EVO",
+        "Gonion",
+        "6.0"
+      ],
+      [
+        "train",
+        "cl7ww1jcl9cd0084f7hzj2eie",
+        "Rotograph EVO",
+        "Upper Incisor Apex",
+        "6.8"
+      ],
+      [
+        "train",
+        "cl7ww1jcl9cd0084f7hzj2eie",
+        "Rotograph EVO",
+        "Upper Incisor Tip",
+        "24.1"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cd4084f52lqaqyi",
+        "Rotograph EVO",
+        "Pronasale",
+        "5.1"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cd4084f52lqaqyi",
+        "Rotograph EVO",
+        "Ramus",
+        "8.6"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cdc084f9lqu9qpa",
+        "Rotograph EVO",
+        "Menton",
+        "5.4"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cdc084f9lqu9qpa",
+        "Rotograph EVO",
+        "Articulare",
+        "6.2"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cdg084f85939lv1",
+        "Rotograph EVO",
+        "Porion",
+        "12.0"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cdk084famgifg66",
+        "Rotograph EVO",
+        "Anterior Nasal Spine",
+        "10.5"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cdk084famgifg66",
+        "Rotograph EVO",
+        "Posterior Nasal Spine",
+        "5.1"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cdk084famgifg66",
+        "Rotograph EVO",
+        "Porion",
+        "5.2"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cdw084fe9756za1",
+        "Rotograph EVO",
+        "A-point",
+        "6.7"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cdw084fe9756za1",
+        "Rotograph EVO",
+        "Porion",
+        "5.2"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9ce0084feq2scm6e",
+        "Rotograph EVO",
+        "Porion",
+        "6.2"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cec084falvh0h9u",
+        "Rotograph EVO",
+        "Ramus",
+        "8.1"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9cec084falvh0h9u",
+        "Rotograph EVO",
+        "Porion",
+        "7.9"
+      ],
+      [
+        "train",
+        "cl7ww1jcm9ceg084f4kby22cz",
+        "Rotograph EVO",
+        "Condylion",
+        "5.7"
+      ],
+      [
+        "train",
+        "cl7ww1jcp9cek084f0t1y8xii",
+        "Rotograph EVO",
+        "Articulare",
+        "7.1"
+      ],
+      [
+        "train",
+        "cl7ww1jcp9cek084f0t1y8xii",
+        "Rotograph EVO",
+        "Soft Tissue Nasion",
+        "6.2"
+      ],
+      [
+        "train",
+        "cl7ww1jcp9cf4084f1q8ebagk",
+        "Rotograph EVO",
+        "Gonion",
+        "6.5"
+      ],
+      [
+        "train",
+        "cl7ww1jcp9cfc084f3hps6wq4",
+        "Rotograph EVO",
+        "Gonion",
+        "5.3"
+      ],
+      [
+        "train",
+        "cl7ww1jcp9cfc084f3hps6wq4",
+        "Rotograph EVO",
+        "Porion",
+        "5.9"
+      ],
+      [
+        "train",
+        "cl7ww1jcp9cfo084fhbnc6i8w",
+        "Rotograph EVO",
+        "Pogonion",
+        "7.2"
+      ],
+      [
+        "train",
+        "cl7wxo5hka77k074mcwlmahk3",
+        "Rotograph EVO",
+        "Gonion",
+        "6.0"
+      ],
+      [
+        "train",
+        "cl7wxu5n5agfg077naial22ae",
+        "Rotograph EVO",
+        "Gonion",
+        "6.8"
+      ],
+      [
+        "train",
+        "cl7wy0ndc0ygb086788gc3quq",
+        "Rotograph EVO",
+        "Condylion",
+        "7.2"
+      ],
+      [
+        "train",
+        "cl7wy0ndc0ygb086788gc3quq",
+        "Rotograph EVO",
+        "Gonion",
+        "9.2"
+      ],
+      [
+        "valid",
+        "cks2ip8fq2a0o0yufhfuo7clg",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "6.1"
+      ],
+      [
+        "valid",
+        "cks2ip8fr2a590yuf5bkp8oan",
+        "ART Plus",
+        "Orbitale",
+        "5.2"
+      ],
+      [
+        "valid",
+        "cks2ip8fw2aep0yuf6etl1t1k",
+        "ART Plus",
+        "Porion",
+        "5.9"
+      ],
+      [
+        "valid",
+        "cks2ip8fz2anq0yufeq3d63ex",
+        "ART Plus",
+        "Gonion",
+        "5.3"
+      ],
+      [
+        "valid",
+        "cks2ip8fz2ape0yuf5j8r9wq2",
+        "ART Plus",
+        "Condylion",
+        "5.2"
+      ],
+      [
+        "valid",
+        "cks2ip8fz2ape0yuf5j8r9wq2",
+        "ART Plus",
+        "Soft Tissue Pogonion",
+        "5.7"
+      ],
+      [
+        "valid",
+        "cks2ip8g32axg0yufdef89p1i",
+        "ART Plus",
+        "Gonion",
+        "9.2"
+      ],
+      [
+        "valid",
+        "cks2ip8g42ayk0yuf7pezfl4r",
+        "ART Plus",
+        "Soft Tissue Pogonion",
+        "5.1"
+      ],
+      [
+        "valid",
+        "cks2ip8g42ayz0yuf9x2e0ewv",
+        "ART Plus",
+        "Gonion",
+        "6.6"
+      ],
+      [
+        "valid",
+        "cks2ip8g62b5n0yuf2dsrb2m5",
+        "ART Plus",
+        "Condylion",
+        "5.6"
+      ],
+      [
+        "valid",
+        "cks2ip8g62b5n0yuf2dsrb2m5",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "5.0"
+      ],
+      [
+        "valid",
+        "cks2ip8g62b5x0yufgam2dfvk",
+        "ART Plus",
+        "Orbitale",
+        "5.1"
+      ],
+      [
+        "valid",
+        "cks7u9tyg5z7t0yto2gkegk25",
+        "ART Plus",
+        "Orbitale",
+        "5.2"
+      ],
+      [
+        "valid",
+        "cl5lg05ue019e074kb93ueaaj",
+        "ProMax with ProTouch",
+        "Nasion",
+        "7.5"
+      ],
+      [
+        "valid",
+        "cl5lg05ue019e074kb93ueaaj",
+        "ProMax with ProTouch",
+        "Orbitale",
+        "6.2"
+      ],
+      [
+        "valid",
+        "cl5lg05ug01am074k5dbu39k7",
+        "ProMax with ProTouch",
+        "Orbitale",
+        "7.3"
+      ],
+      [
+        "valid",
+        "cl5lg05ug01be074ke6h6g4zi",
+        "ProMax with ProTouch",
+        "Gonion",
+        "5.1"
+      ],
+      [
+        "valid",
+        "cl5lg05uj01dm074k6xz1hiw7",
+        "ProMax with ProTouch",
+        "Nasion",
+        "5.3"
+      ],
+      [
+        "valid",
+        "cl5lg05un01hi074kg3mk1imy",
+        "ProMax with ProTouch",
+        "Posterior Nasal Spine",
+        "6.1"
+      ],
+      [
+        "valid",
+        "cl5lg05uq01ki074ket8j8p6r",
+        "ProMax with ProTouch",
+        "Anterior Nasal Spine",
+        "5.2"
+      ],
+      [
+        "valid",
+        "cl5lg05uq01ky074k9skhh5tr",
+        "ProMax with ProTouch",
+        "Orbitale",
+        "6.3"
+      ],
+      [
+        "valid",
+        "cl5lg05uq01ky074k9skhh5tr",
+        "ProMax with ProTouch",
+        "Porion",
+        "6.8"
+      ],
+      [
+        "valid",
+        "cl5lg05ur01la074kh68u16fg",
+        "ProMax with ProTouch",
+        "B-point",
+        "5.8"
+      ],
+      [
+        "valid",
+        "cl76jfqyf0e6107611es40dq0",
+        "Rotograph EVO",
+        "Nasion",
+        "8.6"
+      ],
+      [
+        "valid",
+        "cl76jfqyf0e6107611es40dq0",
+        "Rotograph EVO",
+        "Porion",
+        "22.5"
+      ],
+      [
+        "valid",
+        "cl774ufdq035a076wda2bdcoh",
+        "Rotograph EVO",
+        "Anterior Nasal Spine",
+        "13.4"
+      ],
+      [
+        "valid",
+        "cl7ww1jcl9ccg084f1ezrdhff",
+        "Rotograph EVO",
+        "Orbitale",
+        "8.1"
+      ],
+      [
+        "valid",
+        "cl7ww1jcl9ccg084f1ezrdhff",
+        "Rotograph EVO",
+        "Porion",
+        "16.7"
+      ],
+      [
+        "valid",
+        "cl7ww1jcm9cd8084ffis0009v",
+        "Rotograph EVO",
+        "Ramus",
+        "5.4"
+      ],
+      [
+        "valid",
+        "cl7ww1jcm9cd8084ffis0009v",
+        "Rotograph EVO",
+        "Gonion",
+        "6.9"
+      ],
+      [
+        "valid",
+        "cl7ww1jcm9ce8084f1r2f1mk7",
+        "Rotograph EVO",
+        "Menton",
+        "5.2"
+      ],
+      [
+        "valid",
+        "cl7ww1jcm9ce8084f1r2f1mk7",
+        "Rotograph EVO",
+        "Porion",
+        "14.0"
+      ],
+      [
+        "valid",
+        "cl7ww1jcp9cew084f73828f3u",
+        "Rotograph EVO",
+        "Orbitale",
+        "9.2"
+      ],
+      [
+        "valid",
+        "cl7ww1jcp9cew084f73828f3u",
+        "Rotograph EVO",
+        "Condylion",
+        "5.9"
+      ],
+      [
+        "valid",
+        "cl7ww1jcp9cf0084ffpjcc285",
+        "Rotograph EVO",
+        "Gonion",
+        "6.6"
+      ],
+      [
+        "valid",
+        "cl7ww1jcp9cf0084ffpjcc285",
+        "Rotograph EVO",
+        "Porion",
+        "6.3"
+      ],
+      [
+        "valid",
+        "cl7ww1jcp9cfs084f2r7j3v2k",
+        "Rotograph EVO",
+        "B-point",
+        "5.3"
+      ],
+      [
+        "valid",
+        "cl7ww1jcp9cfs084f2r7j3v2k",
+        "Rotograph EVO",
+        "Gonion",
+        "7.7"
+      ],
+      [
+        "valid",
+        "cl7ww1jcp9cfs084f2r7j3v2k",
+        "Rotograph EVO",
+        "Lower Incisor Apex",
+        "6.1"
+      ],
+      [
+        "test",
+        "cks2ip8fq29zp0yuf7cxd3bz2",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "5.0"
+      ],
+      [
+        "test",
+        "cks2ip8fq2a1d0yuf82ote2y7",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "7.0"
+      ],
+      [
+        "test",
+        "cks2ip8fr2a2r0yuf718nerfe",
+        "ART Plus",
+        "Orbitale",
+        "8.2"
+      ],
+      [
+        "test",
+        "cks2ip8fr2a5e0yuf2k3vg7m5",
+        "ART Plus",
+        "Porion",
+        "5.6"
+      ],
+      [
+        "test",
+        "cks2ip8ft2a9z0yuff4zy2rlu",
+        "ART Plus",
+        "Ramus",
+        "5.9"
+      ],
+      [
+        "test",
+        "cks2ip8ft2a9z0yuff4zy2rlu",
+        "ART Plus",
+        "Articulare",
+        "10.4"
+      ],
+      [
+        "test",
+        "cks2ip8ft2a9z0yuff4zy2rlu",
+        "ART Plus",
+        "Porion",
+        "11.0"
+      ],
+      [
+        "test",
+        "cks2ip8ft2abx0yufa6de8q13",
+        "ART Plus",
+        "Condylion",
+        "6.5"
+      ],
+      [
+        "test",
+        "cks2ip8fx2agi0yufhc8i501s",
+        "ART Plus",
+        "Anterior Nasal Spine",
+        "6.1"
+      ],
+      [
+        "test",
+        "cks2ip8fx2ai10yuf60ue28fy",
+        "ART Plus",
+        "Orbitale",
+        "8.6"
+      ],
+      [
+        "test",
+        "cks2ip8fy2ajz0yufh35h14xu",
+        "ART Plus",
+        "Orbitale",
+        "6.1"
+      ],
+      [
+        "test",
+        "cks2ip8fz2anv0yufdoup0vpn",
+        "ART Plus",
+        "Gonion",
+        "5.7"
+      ],
+      [
+        "test",
+        "cks2ip8fz2ap40yufh17426v6",
+        "ART Plus",
+        "Orbitale",
+        "6.0"
+      ],
+      [
+        "test",
+        "cks2ip8g02asq0yuf59owfht0",
+        "ART Plus",
+        "Ramus",
+        "6.1"
+      ],
+      [
+        "test",
+        "cks2ip8g12auj0yuf0ivx85x6",
+        "ART Plus",
+        "Porion",
+        "7.7"
+      ],
+      [
+        "test",
+        "cks2ip8g32avx0yuf1buw82up",
+        "ART Plus",
+        "Ramus",
+        "8.5"
+      ],
+      [
+        "test",
+        "cks2ip8g32avx0yuf1buw82up",
+        "ART Plus",
+        "Articulare",
+        "8.4"
+      ],
+      [
+        "test",
+        "cks2ip8g32ax10yufafcahymx",
+        "ART Plus",
+        "Posterior Nasal Spine",
+        "9.0"
+      ],
+      [
+        "test",
+        "cks2ip8g42b030yufalnk3n9m",
+        "ART Plus",
+        "Gonion",
+        "5.6"
+      ],
+      [
+        "test",
+        "cks2ip8g42b030yufalnk3n9m",
+        "ART Plus",
+        "Upper Incisor Apex",
+        "5.1"
+      ],
+      [
+        "test",
+        "cks2ip8g62b7l0yufg4h03k4a",
+        "ART Plus",
+        "Porion",
+        "8.4"
+      ],
+      [
+        "test",
+        "cks7u9tyg5z7j0ytobkyxce57",
+        "ART Plus",
+        "Condylion",
+        "7.3"
+      ],
+      [
+        "test",
+        "cl5lg05ul01ga074kg2k84v0q",
+        "ProMax with ProTouch",
+        "Upper Incisor Tip",
+        "5.3"
+      ],
+      [
+        "test",
+        "cl5lg05uq01ka074k6w2h75zi",
+        "ProMax with ProTouch",
+        "Ramus",
+        "7.1"
+      ],
+      [
+        "test",
+        "cl6cc2n5c3zq307710nkfeili",
+        "Veraviewepocs 2D",
+        "Orbitale",
+        "6.4"
+      ],
+      [
+        "test",
+        "cl76jfqy90e250761byh78yb1",
+        "Rotograph EVO",
+        "Articulare",
+        "7.2"
+      ],
+      [
+        "test",
+        "cl76jfqy90e250761byh78yb1",
+        "Rotograph EVO",
+        "Condylion",
+        "8.5"
+      ],
+      [
+        "test",
+        "cl76jfqya0e290761egw009wr",
+        "Rotograph EVO",
+        "Ramus",
+        "10.0"
+      ],
+      [
+        "test",
+        "cl76jfqya0e290761egw009wr",
+        "Rotograph EVO",
+        "Articulare",
+        "7.8"
+      ],
+      [
+        "test",
+        "cl76jfqya0e290761egw009wr",
+        "Rotograph EVO",
+        "Gonion",
+        "6.9"
+      ],
+      [
+        "test",
+        "cl76jfqya0e290761egw009wr",
+        "Rotograph EVO",
+        "Upper Incisor Apex",
+        "5.3"
+      ],
+      [
+        "test",
+        "cl76jfqyd0e3l07613b4o2677",
+        "Rotograph EVO",
+        "Nasion",
+        "15.2"
+      ],
+      [
+        "test",
+        "cl76jfqyd0e3l07613b4o2677",
+        "Rotograph EVO",
+        "Ramus",
+        "12.2"
+      ],
+      [
+        "test",
+        "cl76jfqyd0e3l07613b4o2677",
+        "Rotograph EVO",
+        "Articulare",
+        "8.4"
+      ],
+      [
+        "test",
+        "cl76jfqyd0e3l07613b4o2677",
+        "Rotograph EVO",
+        "Gonion",
+        "8.4"
+      ],
+      [
+        "test",
+        "cl76jfqye0e4h076181yl8ywo",
+        "Rotograph EVO",
+        "Anterior Nasal Spine",
+        "10.8"
+      ],
+      [
+        "test",
+        "cl76jfqye0e4h076181yl8ywo",
+        "Rotograph EVO",
+        "Soft Tissue Nasion",
+        "6.4"
+      ],
+      [
+        "test",
+        "cl76jfqye0e510761g7ke6yrh",
+        "Rotograph EVO",
+        "Nasion",
+        "6.4"
+      ],
+      [
+        "test",
+        "cl76jfqye0e510761g7ke6yrh",
+        "Rotograph EVO",
+        "Gonion",
+        "6.3"
+      ],
+      [
+        "test",
+        "cl76jfqye0e5507615nooedyg",
+        "Rotograph EVO",
+        "Condylion",
+        "8.8"
+      ],
+      [
+        "test",
+        "cl777aklx03ua076whaie06kb",
+        "Rotograph EVO",
+        "B-point",
+        "5.5"
+      ],
+      [
+        "test",
+        "cl777aklx03ue076w3c6qdxbh",
+        "Rotograph EVO",
+        "Porion",
+        "10.4"
+      ],
+      [
+        "test",
+        "cl777aklx03ue076w3c6qdxbh",
+        "Rotograph EVO",
+        "Soft Tissue Nasion",
+        "5.5"
+      ],
+      [
+        "test",
+        "cl7ww1jcm9cdo084f35j14vo1",
+        "Rotograph EVO",
+        "Ramus",
+        "6.5"
+      ],
+      [
+        "test",
+        "cl7ww1jcm9cdo084f35j14vo1",
+        "Rotograph EVO",
+        "Articulare",
+        "5.9"
+      ],
+      [
+        "test",
+        "cl7ww1jcm9cdo084f35j14vo1",
+        "Rotograph EVO",
+        "Gonion",
+        "5.7"
+      ],
+      [
+        "test",
+        "cl7wxlknslhtm074096gd5rpq",
+        "Rotograph EVO",
+        "Gonion",
+        "6.4"
+      ],
+      [
+        "test",
+        "cl7wy31molnr307403883a9a0",
+        "Rotograph EVO",
+        "Gonion",
+        "10.1"
+      ],
+      [
+        "test",
+        "cl7wy31molnr307403883a9a0",
+        "Rotograph EVO",
+        "Upper Incisor Apex",
+        "5.4"
+      ]
+    ],
+    "disagreement_threshold_mm": 5.0
+  },
+  "B_devices": {
+    "devices": {
+      "ART Plus": {
+        "n": 55,
+        "mre": 1.41076832061324,
+        "ci": [
+          1.2944033195222016,
+          1.549024329813782
+        ],
+        "sdr2": 80.76923076923077,
+        "sdr2_ci": [
+          78.25174825174825,
+          83.21678321678321
+        ],
+        "pixel_size_mm": [
+          0.1
+        ]
+      },
+      "Veraviewepocs 2D": {
+        "n": 26,
+        "mre": 0.6871928733588546,
+        "ci": [
+          0.6473299887050296,
+          0.7300404969122893
+        ],
+        "sdr2": 96.7455621301775,
+        "sdr2_ci": [
+          95.56213017751479,
+          97.7810650887574
+        ],
+        "pixel_size_mm": [
+          0.144
+        ]
+      },
+      "Hyperion X5": {
+        "n": 21,
+        "mre": 0.4221172297316371,
+        "ci": [
+          0.3711493280997054,
+          0.4896160722459887
+        ],
+        "sdr2": 99.63369963369964,
+        "sdr2_ci": [
+          99.08424908424908,
+          100.0
+        ],
+        "pixel_size_mm": [
+          0.089
+        ]
+      },
+      "ProMax with ProTouch": {
+        "n": 20,
+        "mre": 1.1908050029684552,
+        "ci": [
+          1.1057784200571261,
+          1.2861082343236652
+        ],
+        "sdr2": 86.53846153846155,
+        "sdr2_ci": [
+          84.03846153846153,
+          89.03846153846153
+        ],
+        "pixel_size_mm": [
+          0.139
+        ]
+      },
+      "Rotograph EVO": {
+        "n": 13,
+        "mre": 1.9933111133728538,
+        "ci": [
+          1.795213107350499,
+          2.2442065303777805
+        ],
+        "sdr2": 64.79289940828401,
+        "sdr2_ci": [
+          60.05917159763313,
+          68.63905325443787
+        ],
+        "pixel_size_mm": [
+          0.135
+        ]
+      },
+      "Smart3D": {
+        "n": 9,
+        "mre": 0.428208392676122,
+        "ci": [
+          0.3931230457515689,
+          0.472645503754831
+        ],
+        "sdr2": 100.0,
+        "sdr2_ci": [
+          100.0,
+          100.0
+        ],
+        "pixel_size_mm": [
+          0.1
+        ]
+      },
+      "ProMax 2D": {
+        "n": 6,
+        "mre": 1.1018520093723856,
+        "ci": [
+          0.9592478182147883,
+          1.2658033474803398
+        ],
+        "sdr2": 85.25641025641025,
+        "sdr2_ci": [
+          76.92307692307693,
+          92.3076923076923
+        ],
+        "pixel_size_mm": [
+          0.139
+        ]
+      },
+      "All": {
+        "n": 150,
+        "mre": 1.0967857752597228,
+        "ci": [
+          1.0044838814285768,
+          1.190621783608459
+        ],
+        "sdr2": 86.8974358974359,
+        "sdr2_ci": [
+          84.84615384615385,
+          88.87179487179488
+        ],
+        "pixel_size_mm": [
+          0.089,
+          0.1,
+          0.135,
+          0.139,
+          0.144
+        ]
+      }
+    },
+    "kruskal_H": 119.3067412940261,
+    "kruskal_p": 2.2786006812582221e-23,
+    "overall_uncorrected_mre": 1.1050722827705082,
+    "overall_corrected_mre": 1.0967857752597228,
+    "swapped_test_images": [
+      "cl5lg05un01hm074k3dwy9l5q"
+    ]
+  },
+  "D_isbi_classification": {
+    "conventions": {
+      "odi_main": 1,
+      "odi_pp": 0,
+      "apdi_fa": 1,
+      "apdi_ab": 1,
+      "apdi_pp": 0,
+      "fma": 0
+    },
+    "Test1": {
+      "ANB": {
+        "accuracy_vs_reference_landmarks": 80.0,
+        "ci": [
+          73.33333333333333,
+          86.0
+        ],
+        "mean_abs_diff": 1.1824481741147828,
+        "accuracy_vs_senior_labels": 76.0,
+        "reference_landmarks_vs_senior_labels": 88.0
+      },
+      "SNB": {
+        "accuracy_vs_reference_landmarks": 89.33333333333333,
+        "ci": [
+          84.0,
+          94.0
+        ],
+        "mean_abs_diff": 1.3751298151499756,
+        "accuracy_vs_senior_labels": 83.33333333333334,
+        "reference_landmarks_vs_senior_labels": 90.0
+      },
+      "SNA": {
+        "accuracy_vs_reference_landmarks": 72.66666666666667,
+        "ci": [
+          65.33333333333333,
+          80.0
+        ],
+        "mean_abs_diff": 1.9008980656912664,
+        "accuracy_vs_senior_labels": 71.33333333333334,
+        "reference_landmarks_vs_senior_labels": 82.66666666666667
+      },
+      "ODI": {
+        "accuracy_vs_reference_landmarks": 86.0,
+        "ci": [
+          80.0,
+          91.33333333333333
+        ],
+        "mean_abs_diff": 2.4305348842598518,
+        "accuracy_vs_senior_labels": 79.33333333333333,
+        "reference_landmarks_vs_senior_labels": 88.0
+      },
+      "APDI": {
+        "accuracy_vs_reference_landmarks": 84.0,
+        "ci": [
+          78.0,
+          89.33333333333333
+        ],
+        "mean_abs_diff": 2.406021668686153,
+        "accuracy_vs_senior_labels": 82.66666666666667,
+        "reference_landmarks_vs_senior_labels": 91.33333333333333
+      },
+      "FHI": {
+        "accuracy_vs_reference_landmarks": 85.33333333333334,
+        "ci": [
+          79.33333333333333,
+          90.66666666666666
+        ],
+        "mean_abs_diff": 0.013739640620023343,
+        "accuracy_vs_senior_labels": 82.0,
+        "reference_landmarks_vs_senior_labels": 92.66666666666666
+      },
+      "FMA": {
+        "accuracy_vs_reference_landmarks": 93.33333333333333,
+        "ci": [
+          89.33333333333333,
+          97.33333333333334
+        ],
+        "mean_abs_diff": 1.4645930597220849,
+        "accuracy_vs_senior_labels": 75.33333333333333,
+        "reference_landmarks_vs_senior_labels": 73.33333333333333
+      },
+      "MW": {
+        "accuracy_vs_reference_landmarks": 83.33333333333334,
+        "ci": [
+          77.33333333333333,
+          89.33333333333333
+        ],
+        "mean_abs_diff": 0.9392320607361999,
+        "accuracy_vs_senior_labels": 68.66666666666667,
+        "reference_landmarks_vs_senior_labels": 78.0
+      },
+      "mean_accuracy": 84.25
+    },
+    "Test2": {
+      "ANB": {
+        "accuracy_vs_reference_landmarks": 83.0,
+        "ci": [
+          75.0,
+          90.0
+        ],
+        "mean_abs_diff": 0.8648348711039273,
+        "accuracy_vs_senior_labels": 84.0,
+        "reference_landmarks_vs_senior_labels": 97.0
+      },
+      "SNB": {
+        "accuracy_vs_reference_landmarks": 88.0,
+        "ci": [
+          81.0,
+          94.0
+        ],
+        "mean_abs_diff": 1.09941781284306,
+        "accuracy_vs_senior_labels": 84.0,
+        "reference_landmarks_vs_senior_labels": 92.0
+      },
+      "SNA": {
+        "accuracy_vs_reference_landmarks": 75.0,
+        "ci": [
+          66.0,
+          83.0
+        ],
+        "mean_abs_diff": 1.1757831138527421,
+        "accuracy_vs_senior_labels": 77.0,
+        "reference_landmarks_vs_senior_labels": 90.0
+      },
+      "ODI": {
+        "accuracy_vs_reference_landmarks": 76.0,
+        "ci": [
+          67.0,
+          84.0
+        ],
+        "mean_abs_diff": 3.1638651341690354,
+        "accuracy_vs_senior_labels": 68.0,
+        "reference_landmarks_vs_senior_labels": 90.0
+      },
+      "APDI": {
+        "accuracy_vs_reference_landmarks": 89.0,
+        "ci": [
+          82.0,
+          95.0
+        ],
+        "mean_abs_diff": 1.8398781924278587,
+        "accuracy_vs_senior_labels": 85.0,
+        "reference_landmarks_vs_senior_labels": 94.0
+      },
+      "FHI": {
+        "accuracy_vs_reference_landmarks": 91.0,
+        "ci": [
+          85.0,
+          96.0
+        ],
+        "mean_abs_diff": 0.009012917331014761,
+        "accuracy_vs_senior_labels": 93.0,
+        "reference_landmarks_vs_senior_labels": 96.0
+      },
+      "FMA": {
+        "accuracy_vs_reference_landmarks": 97.0,
+        "ci": [
+          93.0,
+          100.0
+        ],
+        "mean_abs_diff": 0.9670993031411225,
+        "accuracy_vs_senior_labels": 68.0,
+        "reference_landmarks_vs_senior_labels": 70.0
+      },
+      "MW": {
+        "accuracy_vs_reference_landmarks": 82.0,
+        "ci": [
+          74.0,
+          89.0
+        ],
+        "mean_abs_diff": 0.7917307466458057,
+        "accuracy_vs_senior_labels": 71.0,
+        "reference_landmarks_vs_senior_labels": 82.0
+      },
+      "mean_accuracy": 85.125
+    }
+  },
+  "F_aspect_ratio": {
+    "Aariz test": {
+      "aspect_min": 0.7609942638623327,
+      "aspect_max": 1.303370786516854,
+      "aspect_median": 1.130589430894309,
+      "spearman_rho_absdev_vs_mre": -0.19619117305112305,
+      "p": 0.01612062885169713,
+      "tertiles": [
+        "0.76-1.13: 1.153",
+        "1.13-1.24: 1.322",
+        "1.24-1.30: 0.840"
+      ]
+    },
+    "CephAdoAdu validation part": {
+      "aspect_min": 0.4309859154929577,
+      "aspect_max": 1.5367588932806324,
+      "aspect_median": 0.8880454765360426,
+      "spearman_rho_absdev_vs_mre": -0.3068555583342315,
+      "p": 5.823996493477169e-08,
+      "tertiles": [
+        "0.43-0.84: 0.867",
+        "0.84-1.10: 1.082",
+        "1.10-1.54: 1.082"
+      ]
+    }
+  }
+}
