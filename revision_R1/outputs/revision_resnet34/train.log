@@ -1,0 +1,11 @@
+Downloading: "https://download.pytorch.org/models/resnet34-b627a593.pth" to /root/.cache/torch/hub/checkpoints/resnet34-b627a593.pth
+  0%|          | 0.00/83.3M [00:00<?, ?B/s]  6%|▌         | 4.62M/83.3M [00:00<00:01, 46.9MB/s] 12%|█▏        | 10.0M/83.3M [00:00<00:01, 51.9MB/s] 18%|█▊        | 15.0M/83.3M [00:00<00:01, 50.5MB/s] 24%|██▍       | 19.9M/83.3M [00:00<00:01, 48.8MB/s] 30%|██▉       | 24.6M/83.3M [00:00<00:01, 47.3MB/s] 36%|███▌      | 29.9M/83.3M [00:00<00:01, 48.8MB/s] 43%|████▎     | 35.5M/83.3M [00:00<00:00, 51.9MB/s] 56%|█████▌    | 46.2M/83.3M [00:00<00:00, 70.4MB/s] 64%|██████▍   | 53.1M/83.3M [00:00<00:00, 70.1MB/s] 78%|███████▊  | 65.1M/83.3M [00:01<00:00, 86.8MB/s] 92%|█████████▏| 76.9M/83.3M [00:01<00:00, 97.7MB/s]100%|██████████| 83.3M/83.3M [00:01<00:00, 70.4MB/s]
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+seed=42 backbone_amp=False
+Epoch 01/150 | Train loss: 826.5550 (hm=1.1979, re=67.3341, fe=758.0230) | Val loss: 40.5858 (hm=1.1726, re=7.8451, fe=31.5681) | Val MRE(mm): 202.941 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 44.8s
+Epoch 02/150 | Train loss: 40.3842 (hm=1.1224, re=7.8376, fe=31.4242) | Val loss: 40.3597 (hm=1.0828, re=7.8414, fe=31.4355) | Val MRE(mm): 201.557 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 44.4s
+Epoch 03/150 | Train loss: 40.2260 (hm=1.0106, re=7.8344, fe=31.3810) | Val loss: 40.1882 (hm=0.9637, re=7.8432, fe=31.3813) | Val MRE(mm): 199.692 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 44.1s
+Epoch 04/150 | Train loss: 40.0939 (hm=0.9017, re=7.8352, fe=31.3570) | Val loss: 40.0808 (hm=0.8632, re=7.8465, fe=31.3712) | Val MRE(mm): 197.834 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 44.7s
+Epoch 05/150 | Train loss: 39.9593 (hm=0.8065, re=7.8328, fe=31.3200) | Val loss: 39.9533 (hm=0.7654, re=7.8349, fe=31.3530) | Val MRE(mm): 196.002 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 44.5s
+Epoch 06/150 | Train loss: 39.8303 (hm=0.7010, re=7.8316, fe=31.2977) | Val loss: 39.8097 (hm=0.6483, re=7.8406, fe=31.3208) | Val MRE(mm): 194.058 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 44.3s

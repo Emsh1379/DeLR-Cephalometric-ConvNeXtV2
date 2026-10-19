@@ -121,3 +121,13 @@ Epoch 105/200 | Train loss: 11.2483 (hm=0.3753, re=3.5323, fe=7.3407) | Val loss
 Epoch 106/200 | Train loss: 11.2675 (hm=0.3753, re=3.5360, fe=7.3562) | Val loss: 16.9828 (hm=0.3762, re=3.5489, fe=13.0577) | Val MRE(mm): 1.100 | SDR%(2/2.5/3/4): 86.6/91.5/94.3/97.1 | 238.5s
 Epoch 107/200 | Train loss: 11.0669 (hm=0.3750, re=3.5098, fe=7.1821) | Val loss: 17.7396 (hm=0.3760, re=3.8650, fe=13.4986) | Val MRE(mm): 1.113 | SDR%(2/2.5/3/4): 86.6/91.3/94.4/97.2 | 238.7s
 Epoch 108/200 | Train loss: 11.0158 (hm=0.3751, re=3.5002, fe=7.1404) | Val loss: 17.2555 (hm=0.3761, re=3.6819, fe=13.1976) | Val MRE(mm): 1.084 | SDR%(2/2.5/3/4): 87.1/91.9/94.7/97.2 | 238.3s
+Epoch 109/200 | Train loss: 10.9807 (hm=0.3752, re=3.4995, fe=7.1060) | Val loss: 17.3519 (hm=0.3759, re=3.8060, fe=13.1700) | Val MRE(mm): 1.099 | SDR%(2/2.5/3/4): 86.6/91.4/94.3/97.1 | 240.6s
+Epoch 110/200 | Train loss: 11.1006 (hm=0.3753, re=3.5263, fe=7.1990) | Val loss: 17.5825 (hm=0.3760, re=3.4879, fe=13.7186) | Val MRE(mm): 1.086 | SDR%(2/2.5/3/4): 86.6/91.7/94.5/97.3 | 238.5s
+Epoch 111/200 | Train loss: 10.8819 (hm=0.3752, re=3.4803, fe=7.0264) | Val loss: 17.5725 (hm=0.3757, re=3.6859, fe=13.5109) | Val MRE(mm): 1.089 | SDR%(2/2.5/3/4): 87.1/91.9/94.5/97.2 | 238.4s
+Epoch 112/200 | Train loss: 10.8081 (hm=0.3749, re=3.4734, fe=6.9598) | Val loss: 18.5785 (hm=0.3755, re=3.8839, fe=14.3191) | Val MRE(mm): 1.075 | SDR%(2/2.5/3/4): 87.7/91.8/94.7/97.5 | 238.6s
+Epoch 113/200 | Train loss: 10.7384 (hm=0.3749, re=3.4822, fe=6.8813) | Val loss: 17.7167 (hm=0.3756, re=3.6440, fe=13.6972) | Val MRE(mm): 1.080 | SDR%(2/2.5/3/4): 87.4/91.7/94.5/97.3 | 238.6s
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+seed=42 backbone_amp=True
+Restored training state from outputs/aariz_29/last.pt: epoch 113 done, best val MRE 1.075, lr 1.372e-04
+Epoch 114/200 | Train loss: 10.7019 (hm=0.3748, re=3.4513, fe=6.8759) | Val loss: 18.0189 (hm=0.3756, re=3.5431, fe=14.1002) | Val MRE(mm): 1.085 | SDR%(2/2.5/3/4): 87.1/91.7/94.4/97.2 | 252.9s
