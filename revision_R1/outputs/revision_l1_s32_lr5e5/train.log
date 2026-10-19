@@ -1,0 +1,14 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+seed=42 backbone_amp=False
+Epoch 01/150 | Train loss: 104.3397 (hm=1.2137, re=20.6784, fe=82.4476) | Val loss: 104.3807 (hm=1.1639, re=20.7509, fe=82.4659) | Val MRE(mm): 200.742 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 113.2s
+Epoch 02/150 | Train loss: 103.1857 (hm=1.1258, re=20.5865, fe=81.4735) | Val loss: 103.2869 (hm=1.0744, re=20.6746, fe=81.5379) | Val MRE(mm): 197.792 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 109.6s
+Epoch 03/150 | Train loss: 102.6255 (hm=1.0271, re=20.6181, fe=80.9803) | Val loss: 102.2887 (hm=0.9808, re=20.6166, fe=80.6912) | Val MRE(mm): 194.965 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 110.0s
+Epoch 04/150 | Train loss: 101.9304 (hm=0.9318, re=20.6022, fe=80.3964) | Val loss: 101.5340 (hm=0.8588, re=20.5866, fe=80.0887) | Val MRE(mm): 192.760 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 110.2s
+Epoch 05/150 | Train loss: 100.7313 (hm=0.7243, re=20.4846, fe=79.5224) | Val loss: 100.8667 (hm=0.6087, re=20.5734, fe=79.6846) | Val MRE(mm): 191.104 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 110.4s
+Epoch 06/150 | Train loss: 100.5585 (hm=0.5468, re=20.5386, fe=79.4731) | Val loss: 100.5031 (hm=0.4964, re=20.5667, fe=79.4400) | Val MRE(mm): 190.053 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 110.2s
+Epoch 07/150 | Train loss: 100.1307 (hm=0.4662, re=20.4982, fe=79.1663) | Val loss: 100.2932 (hm=0.4407, re=20.5609, fe=79.2917) | Val MRE(mm): 189.407 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 109.9s
+Epoch 08/150 | Train loss: 100.2957 (hm=0.4312, re=20.5570, fe=79.3075) | Val loss: 100.1486 (hm=0.4174, re=20.5542, fe=79.1770) | Val MRE(mm): 188.973 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 110.1s
+Epoch 09/150 | Train loss: 99.9395 (hm=0.4134, re=20.5064, fe=79.0197) | Val loss: 100.0065 (hm=0.4086, re=20.5458, fe=79.0521) | Val MRE(mm): 188.537 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 110.0s
+Epoch 10/150 | Train loss: 99.6029 (hm=0.4033, re=20.4620, fe=78.7377) | Val loss: 99.8323 (hm=0.3995, re=20.5350, fe=78.8977) | Val MRE(mm): 188.010 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 109.9s
