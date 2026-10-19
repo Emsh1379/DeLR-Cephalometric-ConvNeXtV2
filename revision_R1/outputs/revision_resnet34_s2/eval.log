@@ -1,0 +1,10 @@
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+Saved predictions to outputs/revision_resnet34_s2/test1_predictions.json
+MRE(mm): 1.163 | MRE(px): 11.631
+SDR: 86.46%@2.0mm / 91.79%@2.5mm / 94.81%@3.0mm / 98.14%@4.0mm
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+Saved predictions to outputs/revision_resnet34_s2/test2_predictions.json
+MRE(mm): 1.480 | MRE(px): 14.799
+SDR: 74.42%@2.0mm / 82.11%@2.5mm / 88.11%@3.0mm / 94.53%@4.0mm
