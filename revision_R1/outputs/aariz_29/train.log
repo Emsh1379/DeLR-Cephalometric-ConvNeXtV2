@@ -22,3 +22,23 @@ Epoch 15/200 | Train loss: 37.9556 (hm=0.3786, re=7.6708, fe=29.9063) | Val loss
 Epoch 16/200 | Train loss: 37.7561 (hm=0.3785, re=7.6596, fe=29.7181) | Val loss: 37.6690 (hm=0.3771, re=7.6540, fe=29.6380) | Val MRE(mm): 101.957 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 229.0s
 Epoch 17/200 | Train loss: 37.4743 (hm=0.3778, re=7.6423, fe=29.4542) | Val loss: 37.3348 (hm=0.3760, re=7.6424, fe=29.3164) | Val MRE(mm): 91.287 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.1 | 229.2s
 Epoch 18/200 | Train loss: 37.1273 (hm=0.3779, re=7.6223, fe=29.1271) | Val loss: 36.9880 (hm=0.3763, re=7.6199, fe=28.9918) | Val MRE(mm): 80.578 | SDR%(2/2.5/3/4): 0.2/0.2/0.3/0.4 | 229.0s
+Epoch 19/200 | Train loss: 36.7709 (hm=0.3777, re=7.6052, fe=28.7881) | Val loss: 36.5911 (hm=0.3761, re=7.6000, fe=28.6151) | Val MRE(mm): 69.526 | SDR%(2/2.5/3/4): 0.4/0.4/0.5/0.6 | 229.1s
+Epoch 20/200 | Train loss: 36.3998 (hm=0.3784, re=7.5902, fe=28.4312) | Val loss: 36.1072 (hm=0.3766, re=7.5804, fe=28.1502) | Val MRE(mm): 58.082 | SDR%(2/2.5/3/4): 0.3/0.4/0.6/1.1 | 229.5s
+Epoch 21/200 | Train loss: 35.8934 (hm=0.3788, re=7.5661, fe=27.9485) | Val loss: 35.6205 (hm=0.3771, re=7.5579, fe=27.6856) | Val MRE(mm): 47.577 | SDR%(2/2.5/3/4): 0.4/0.5/0.7/1.3 | 229.2s
+Epoch 22/200 | Train loss: 35.3537 (hm=0.3799, re=7.5420, fe=27.4318) | Val loss: 35.0526 (hm=0.3777, re=7.5343, fe=27.1405) | Val MRE(mm): 38.195 | SDR%(2/2.5/3/4): 0.7/1.0/1.2/1.7 | 229.2s
+Epoch 23/200 | Train loss: 34.7665 (hm=0.3810, re=7.5157, fe=26.8699) | Val loss: 34.4703 (hm=0.3785, re=7.5077, fe=26.5841) | Val MRE(mm): 31.076 | SDR%(2/2.5/3/4): 1.0/1.4/1.8/3.3 | 229.0s
+Epoch 24/200 | Train loss: 34.2010 (hm=0.3817, re=7.4902, fe=26.3291) | Val loss: 33.8693 (hm=0.3810, re=7.4783, fe=26.0101) | Val MRE(mm): 26.744 | SDR%(2/2.5/3/4): 2.0/3.1/4.0/5.9 | 229.1s
+Epoch 25/200 | Train loss: 33.6439 (hm=0.3825, re=7.4559, fe=25.8055) | Val loss: 33.1821 (hm=0.3844, re=7.4432, fe=25.3545) | Val MRE(mm): 21.316 | SDR%(2/2.5/3/4): 3.2/4.6/5.9/9.4 | 229.8s
+Epoch 26/200 | Train loss: 33.0863 (hm=0.3847, re=7.4205, fe=25.2811) | Val loss: 33.1205 (hm=0.3863, re=7.4059, fe=25.3284) | Val MRE(mm): 22.138 | SDR%(2/2.5/3/4): 1.3/2.0/2.6/5.3 | 229.2s
+Epoch 27/200 | Train loss: 32.5736 (hm=0.3847, re=7.3844, fe=24.8045) | Val loss: 32.2712 (hm=0.3847, re=7.3645, fe=24.5220) | Val MRE(mm): 18.007 | SDR%(2/2.5/3/4): 2.7/4.4/6.2/9.4 | 229.1s
+Epoch 28/200 | Train loss: 31.9121 (hm=0.3856, re=7.3408, fe=24.1857) | Val loss: 31.6334 (hm=0.3852, re=7.3222, fe=23.9260) | Val MRE(mm): 15.702 | SDR%(2/2.5/3/4): 5.4/7.8/10.6/16.8 | 229.1s
+Epoch 29/200 | Train loss: 31.3519 (hm=0.3888, re=7.2955, fe=23.6676) | Val loss: 30.6011 (hm=0.3833, re=7.2776, fe=22.9401) | Val MRE(mm): 11.829 | SDR%(2/2.5/3/4): 10.4/14.7/19.4/28.2 | 229.3s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+seed=42 backbone_amp=True
+Restored training state from outputs/aariz_29/last.pt: epoch 29 done, best val MRE 11.829, lr 9.898e-05
+Epoch 30/200 | Train loss: 30.4451 (hm=0.3888, re=7.2431, fe=22.8132) | Val loss: 29.8334 (hm=0.3846, re=7.2278, fe=22.2210) | Val MRE(mm): 9.904 | SDR%(2/2.5/3/4): 16.5/22.6/28.1/38.4 | 253.1s
+Epoch 31/200 | Train loss: 29.7730 (hm=0.3894, re=7.1930, fe=22.1907) | Val loss: 29.0877 (hm=0.3856, re=7.1653, fe=21.5368) | Val MRE(mm): 8.305 | SDR%(2/2.5/3/4): 23.4/30.3/37.1/48.6 | 250.7s
+Epoch 32/200 | Train loss: 29.0524 (hm=0.3917, re=7.1174, fe=21.5432) | Val loss: 28.0676 (hm=0.3893, re=7.0827, fe=20.5956) | Val MRE(mm): 6.674 | SDR%(2/2.5/3/4): 30.5/38.9/47.5/61.1 | 250.2s
+Epoch 33/200 | Train loss: 28.3634 (hm=0.3925, re=7.0328, fe=20.9382) | Val loss: 27.7926 (hm=0.3888, re=6.9791, fe=20.4247) | Val MRE(mm): 6.737 | SDR%(2/2.5/3/4): 34.9/43.9/52.0/64.4 | 249.6s

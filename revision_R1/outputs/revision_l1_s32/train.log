@@ -1,0 +1,7 @@
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+seed=42 backbone_amp=False
+Epoch 01/150 | Train loss: 102.9610 (hm=1.1026, re=20.5769, fe=81.2815) | Val loss: 102.0948 (hm=0.9725, re=20.6082, fe=80.5140) | Val MRE(mm): 194.259 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 114.4s
+Epoch 02/150 | Train loss: 100.6696 (hm=0.7898, re=20.4574, fe=79.4224) | Val loss: 100.6409 (hm=0.5767, re=20.5685, fe=79.4957) | Val MRE(mm): 190.286 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 111.9s
+Epoch 03/150 | Train loss: 100.3215 (hm=0.4883, re=20.5367, fe=79.2965) | Val loss: 100.2059 (hm=0.4351, re=20.5572, fe=79.2135) | Val MRE(mm): 189.109 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.4s
+Epoch 04/150 | Train loss: 100.1698 (hm=0.4208, re=20.5508, fe=79.1982) | Val loss: 99.9718 (hm=0.4081, re=20.5442, fe=79.0195) | Val MRE(mm): 188.424 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.2s
