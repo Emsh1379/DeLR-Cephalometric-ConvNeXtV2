@@ -131,3 +131,10 @@ Epoch 113/200 | Train loss: 10.7384 (hm=0.3749, re=3.4822, fe=6.8813) | Val loss
 seed=42 backbone_amp=True
 Restored training state from outputs/aariz_29/last.pt: epoch 113 done, best val MRE 1.075, lr 1.372e-04
 Epoch 114/200 | Train loss: 10.7019 (hm=0.3748, re=3.4513, fe=6.8759) | Val loss: 18.0189 (hm=0.3756, re=3.5431, fe=14.1002) | Val MRE(mm): 1.085 | SDR%(2/2.5/3/4): 87.1/91.7/94.4/97.2 | 252.9s
+Epoch 115/200 | Train loss: 10.7239 (hm=0.3748, re=3.4381, fe=6.9111) | Val loss: 17.6305 (hm=0.3755, re=3.4991, fe=13.7559) | Val MRE(mm): 1.073 | SDR%(2/2.5/3/4): 87.3/92.0/94.5/97.3 | 246.0s
+Epoch 116/200 | Train loss: 10.5131 (hm=0.3746, re=3.3875, fe=6.7510) | Val loss: 16.8347 (hm=0.3755, re=3.4182, fe=13.0410) | Val MRE(mm): 1.079 | SDR%(2/2.5/3/4): 87.3/92.0/94.6/97.3 | 245.6s
+Epoch 117/200 | Train loss: 10.4303 (hm=0.3745, re=3.3895, fe=6.6663) | Val loss: 17.6697 (hm=0.3753, re=3.4639, fe=13.8305) | Val MRE(mm): 1.063 | SDR%(2/2.5/3/4): 87.8/92.0/94.5/97.3 | 245.9s
+Epoch 118/200 | Train loss: 10.5417 (hm=0.3746, re=3.3934, fe=6.7737) | Val loss: 17.3665 (hm=0.3754, re=3.4030, fe=13.5880) | Val MRE(mm): 1.111 | SDR%(2/2.5/3/4): 86.6/91.3/94.2/97.1 | 248.1s
+Epoch 119/200 | Train loss: 10.3611 (hm=0.3742, re=3.3755, fe=6.6113) | Val loss: 17.4955 (hm=0.3752, re=3.3119, fe=13.8084) | Val MRE(mm): 1.084 | SDR%(2/2.5/3/4): 87.2/92.0/94.9/97.2 | 246.2s
+Epoch 120/200 | Train loss: 10.4811 (hm=0.3743, re=3.3876, fe=6.7192) | Val loss: 18.0376 (hm=0.3751, re=3.4284, fe=14.2341) | Val MRE(mm): 1.065 | SDR%(2/2.5/3/4): 87.5/91.9/94.8/97.4 | 245.4s
+Epoch 121/200 | Train loss: 10.1727 (hm=0.3743, re=3.3403, fe=6.4582) | Val loss: 18.9316 (hm=0.3753, re=3.3579, fe=15.1984) | Val MRE(mm): 1.080 | SDR%(2/2.5/3/4): 87.6/91.9/94.6/97.1 | 245.7s
