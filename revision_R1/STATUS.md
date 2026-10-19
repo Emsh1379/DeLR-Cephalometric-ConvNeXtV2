@@ -1,6 +1,6 @@
 # R1 revision runs - progress
 
-Last update: 2026-10-19 20:27 (server UTC 16:57). Updated automatically every 20 minutes while the runs are going.
+Last update: 2026-10-19 20:29 (server UTC 16:59). Updated automatically every 20 minutes while the runs are going.
 
 | Run | Status | Epochs | Best validation MRE (mm) | Last validation MRE (mm) |
 |---|---|---|---|---|
@@ -8,7 +8,7 @@ Last update: 2026-10-19 20:27 (server UTC 16:57). Updated automatically every 20
 | ConvNeXt V2, fixed-scale L1 loss (32 px), ISBI 2015 | finished | 100/150 | 40.823 | 40.907 |
 | ConvNeXt V2, fixed-scale L1 loss (32 px), peak lr 5e-5, ISBI 2015 | finished | 77/150 | 40.313 | 40.313 |
 | ConvNeXt V2, Aariz all 29 landmarks | training | 114/200 | 1.075 | 1.085 |
-| ResNet-34 dual encoder, ISBI 2015 | training | 5/150 | 196.002 | 196.002 |
+| ResNet-34 dual encoder, ISBI 2015 | training | 8/150 | 190.324 | 190.324 |
 
 Validation set: ISBI 2015 Test1 (ISBI runs) and the Aariz validation split (Aariz run). Test results appear in the run folders once a run has finished.
 Analyses (CPU / inference only) are in `results/revision/`. Training logs and predictions are in `outputs/<run>/`.
