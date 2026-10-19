@@ -42,3 +42,15 @@ Epoch 30/200 | Train loss: 30.4451 (hm=0.3888, re=7.2431, fe=22.8132) | Val loss
 Epoch 31/200 | Train loss: 29.7730 (hm=0.3894, re=7.1930, fe=22.1907) | Val loss: 29.0877 (hm=0.3856, re=7.1653, fe=21.5368) | Val MRE(mm): 8.305 | SDR%(2/2.5/3/4): 23.4/30.3/37.1/48.6 | 250.7s
 Epoch 32/200 | Train loss: 29.0524 (hm=0.3917, re=7.1174, fe=21.5432) | Val loss: 28.0676 (hm=0.3893, re=7.0827, fe=20.5956) | Val MRE(mm): 6.674 | SDR%(2/2.5/3/4): 30.5/38.9/47.5/61.1 | 250.2s
 Epoch 33/200 | Train loss: 28.3634 (hm=0.3925, re=7.0328, fe=20.9382) | Val loss: 27.7926 (hm=0.3888, re=6.9791, fe=20.4247) | Val MRE(mm): 6.737 | SDR%(2/2.5/3/4): 34.9/43.9/52.0/64.4 | 249.6s
+Epoch 34/200 | Train loss: 27.7111 (hm=0.3936, re=6.9279, fe=20.3896) | Val loss: 27.5130 (hm=0.3921, re=6.8624, fe=20.2586) | Val MRE(mm): 6.910 | SDR%(2/2.5/3/4): 27.7/36.3/44.1/57.7 | 250.1s
+Epoch 35/200 | Train loss: 27.1049 (hm=0.3938, re=6.8050, fe=19.9061) | Val loss: 26.5656 (hm=0.3933, re=6.7304, fe=19.4419) | Val MRE(mm): 6.017 | SDR%(2/2.5/3/4): 35.8/45.7/53.7/66.6 | 249.8s
+Epoch 36/200 | Train loss: 26.7024 (hm=0.3958, re=6.6666, fe=19.6399) | Val loss: 27.7518 (hm=0.3946, re=6.6637, fe=20.6936) | Val MRE(mm): 10.960 | SDR%(2/2.5/3/4): 21.2/28.0/34.1/44.4 | 250.8s
+Epoch 37/200 | Train loss: 25.5003 (hm=0.3970, re=6.4990, fe=18.6044) | Val loss: 24.6784 (hm=0.3924, re=6.3808, fe=17.9053) | Val MRE(mm): 4.838 | SDR%(2/2.5/3/4): 48.8/58.6/66.9/78.7 | 249.7s
+Epoch 38/200 | Train loss: 24.6642 (hm=0.3994, re=6.2894, fe=17.9755) | Val loss: 23.2362 (hm=0.3991, re=6.1370, fe=16.7002) | Val MRE(mm): 4.537 | SDR%(2/2.5/3/4): 57.5/67.6/74.3/83.4 | 249.4s
+Epoch 39/200 | Train loss: 23.6348 (hm=0.4000, re=6.0227, fe=17.2122) | Val loss: 22.3266 (hm=0.3940, re=5.8527, fe=16.0799) | Val MRE(mm): 4.440 | SDR%(2/2.5/3/4): 61.5/70.8/76.9/85.3 | 249.0s
+Epoch 40/200 | Train loss: 22.6436 (hm=0.3984, re=5.7947, fe=16.4505) | Val loss: 22.0095 (hm=0.3920, re=5.8613, fe=15.7562) | Val MRE(mm): 3.244 | SDR%(2/2.5/3/4): 63.0/72.0/78.2/86.6 | 248.9s
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+seed=42 backbone_amp=True
+Restored training state from outputs/aariz_29/last.pt: epoch 40 done, best val MRE 3.244, lr 1.520e-04
+Epoch 41/200 | Train loss: 21.4688 (hm=0.3964, re=5.5878, fe=15.4846) | Val loss: 19.9895 (hm=0.3900, re=5.3823, fe=14.2172) | Val MRE(mm): 1.756 | SDR%(2/2.5/3/4): 73.3/81.2/86.8/92.7 | 246.0s

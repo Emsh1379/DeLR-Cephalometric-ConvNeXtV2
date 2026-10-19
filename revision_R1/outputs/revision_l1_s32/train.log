@@ -5,3 +5,25 @@ Epoch 01/150 | Train loss: 102.9610 (hm=1.1026, re=20.5769, fe=81.2815) | Val lo
 Epoch 02/150 | Train loss: 100.6696 (hm=0.7898, re=20.4574, fe=79.4224) | Val loss: 100.6409 (hm=0.5767, re=20.5685, fe=79.4957) | Val MRE(mm): 190.286 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 111.9s
 Epoch 03/150 | Train loss: 100.3215 (hm=0.4883, re=20.5367, fe=79.2965) | Val loss: 100.2059 (hm=0.4351, re=20.5572, fe=79.2135) | Val MRE(mm): 189.109 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.4s
 Epoch 04/150 | Train loss: 100.1698 (hm=0.4208, re=20.5508, fe=79.1982) | Val loss: 99.9718 (hm=0.4081, re=20.5442, fe=79.0195) | Val MRE(mm): 188.424 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.2s
+Epoch 05/150 | Train loss: 99.4172 (hm=0.4003, re=20.4379, fe=78.5789) | Val loss: 99.6625 (hm=0.3929, re=20.5248, fe=78.7448) | Val MRE(mm): 187.489 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.6s
+Epoch 06/150 | Train loss: 99.3807 (hm=0.3900, re=20.4791, fe=78.5116) | Val loss: 99.2867 (hm=0.3864, re=20.5002, fe=78.4001) | Val MRE(mm): 186.319 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.6s
+Epoch 07/150 | Train loss: 98.8028 (hm=0.3855, re=20.4183, fe=77.9990) | Val loss: 98.8585 (hm=0.3843, re=20.4716, fe=78.0026) | Val MRE(mm): 184.975 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.3s
+Epoch 08/150 | Train loss: 98.6555 (hm=0.3820, re=20.4522, fe=77.8213) | Val loss: 98.3380 (hm=0.3818, re=20.4367, fe=77.5195) | Val MRE(mm): 183.338 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.3s
+Epoch 09/150 | Train loss: 97.8696 (hm=0.3795, re=20.3713, fe=77.1188) | Val loss: 97.7215 (hm=0.3796, re=20.3954, fe=76.9465) | Val MRE(mm): 181.402 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.5s
+Epoch 10/150 | Train loss: 97.0251 (hm=0.3785, re=20.2921, fe=76.3544) | Val loss: 96.9945 (hm=0.3783, re=20.3466, fe=76.2695) | Val MRE(mm): 179.112 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.7s
+Epoch 11/150 | Train loss: 95.8969 (hm=0.3775, re=20.1717, fe=75.3477) | Val loss: 96.1596 (hm=0.3780, re=20.2905, fe=75.4911) | Val MRE(mm): 176.475 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.3s
+Epoch 12/150 | Train loss: 95.1167 (hm=0.3779, re=20.1361, fe=74.6027) | Val loss: 95.2085 (hm=0.3771, re=20.2269, fe=74.6044) | Val MRE(mm): 173.475 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.4s
+Epoch 13/150 | Train loss: 95.1498 (hm=0.3758, re=20.2799, fe=74.4940) | Val loss: 94.1230 (hm=0.3766, re=20.1545, fe=73.5920) | Val MRE(mm): 170.044 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.0s
+Epoch 14/150 | Train loss: 92.5033 (hm=0.3751, re=19.9086, fe=72.2196) | Val loss: 92.8494 (hm=0.3758, re=20.0696, fe=72.4040) | Val MRE(mm): 166.017 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.4s
+Epoch 15/150 | Train loss: 91.5597 (hm=0.3746, re=19.8978, fe=71.2873) | Val loss: 91.4660 (hm=0.3756, re=19.9767, fe=71.1136) | Val MRE(mm): 161.639 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 111.8s
+Epoch 16/150 | Train loss: 89.7567 (hm=0.3747, re=19.7328, fe=69.6492) | Val loss: 89.8906 (hm=0.3753, re=19.8727, fe=69.6427) | Val MRE(mm): 156.668 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.2s
+Epoch 17/150 | Train loss: 88.3664 (hm=0.3745, re=19.6819, fe=68.3101) | Val loss: 88.0772 (hm=0.3751, re=19.7521, fe=67.9500) | Val MRE(mm): 150.949 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.0s
+Epoch 18/150 | Train loss: 87.0169 (hm=0.3735, re=19.6713, fe=66.9721) | Val loss: 86.0526 (hm=0.3752, re=19.6175, fe=66.0599) | Val MRE(mm): 144.558 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 112.0s
+Epoch 19/150 | Train loss: 84.4590 (hm=0.3737, re=19.4451, fe=64.6402) | Val loss: 83.7980 (hm=0.3749, re=19.4676, fe=63.9555) | Val MRE(mm): 137.463 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 111.6s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/kaggle/working/DeLR-Cephalometric-ConvNeXtV2/delr/model.py:411: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.reference_encoder = nn.TransformerEncoder(enc_layer_ref, num_layers=num_layers_ref)
+seed=42 backbone_amp=False
+Restored training state from outputs/revision_l1_s32/last.pt: epoch 19 done, best val MRE 137.463, lr 8.081e-05
+Epoch 20/150 | Train loss: 81.8194 (hm=0.3746, re=19.2327, fe=62.2120) | Val loss: 81.3200 (hm=0.3747, re=19.3028, fe=61.6426) | Val MRE(mm): 129.706 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 109.0s
+Epoch 21/150 | Train loss: 79.0841 (hm=0.3733, re=19.0329, fe=59.6778) | Val loss: 78.5800 (hm=0.3744, re=19.1203, fe=59.0852) | Val MRE(mm): 121.171 | SDR%(2/2.5/3/4): 0.0/0.0/0.0/0.0 | 109.9s
