@@ -78,9 +78,41 @@ Full list in revision_analyses.json (C_label_check.junior_senior_gt_mm).
 
 Kruskal-Wallis on per-image MRE: H = 119.31, p = 2.28e-23. Overall MRE uncorrected 1.105 mm, corrected 1.097 mm.
 
-## E. Aariz 29 landmarks
+## E. Aariz, model trained on all 29 landmarks
 
-Skipped: /kaggle/working/DeLR-Cephalometric-ConvNeXtV2/checkpoints/Aariz_29/test_predictions.json not found.
+MRE (29 landmarks) 1.071 mm (95% CI 0.986-1.165); uncorrected 1.078 mm. SDR 87.70 / 91.66 / 94.69 / 96.99 % at 2/2.5/3/4 mm. Same model on the 26 landmarks of the main analysis: 1.090 mm; three soft-tissue landmarks: 0.904 mm.
+
+| # | Landmark | MRE (mm) | 95% CI | SDR 2 mm (%) | SDR 4 mm (%) |
+|---|---|---|---|---|---|
+| 1 | A-point | 0.876 | 0.773-0.988 | 90.67 | 100.00 |
+| 2 | Anterior Nasal Spine | 1.170 | 1.000-1.360 | 87.33 | 96.00 |
+| 3 | B-point | 0.820 | 0.722-0.921 | 95.33 | 100.00 |
+| 4 | Menton | 0.467 | 0.406-0.532 | 99.33 | 100.00 |
+| 5 | Nasion | 0.895 | 0.747-1.069 | 90.00 | 98.67 |
+| 6 | Orbitale | 1.203 | 1.051-1.366 | 82.67 | 96.67 |
+| 7 | Pogonion | 0.552 | 0.478-0.631 | 98.67 | 100.00 |
+| 8 | Posterior Nasal Spine | 1.444 | 1.236-1.698 | 83.33 | 95.33 |
+| 9 | Pronasale | 0.728 | 0.638-0.821 | 95.33 | 100.00 |
+| 10 | Ramus | 1.996 | 1.691-2.330 | 66.67 | 86.00 |
+| 11 | Sella | 0.648 | 0.583-0.716 | 100.00 | 100.00 |
+| 12 | Articulare | 1.545 | 1.236-1.923 | 82.00 | 92.67 |
+| 13 | Condylion | 2.000 | 1.705-2.340 | 64.00 | 88.00 |
+| 14 | Gnathion | 0.438 | 0.379-0.499 | 99.33 | 100.00 |
+| 15 | Gonion | 1.514 | 1.272-1.773 | 75.33 | 93.33 |
+| 16 | Porion | 1.503 | 1.279-1.748 | 77.33 | 94.00 |
+| 17 | Lower 2nd PM Cusp Tip | 1.309 | 1.066-1.603 | 86.67 | 96.67 |
+| 18 | Lower Incisor Tip | 0.749 | 0.662-0.838 | 96.00 | 100.00 |
+| 19 | Lower Molar Cusp Tip | 1.093 | 0.888-1.329 | 89.33 | 96.67 |
+| 20 | Upper 2nd PM Cusp Tip | 1.291 | 1.066-1.540 | 81.33 | 94.67 |
+| 21 | Upper Incisor Apex | 1.177 | 1.042-1.321 | 86.67 | 98.67 |
+| 22 | Upper Incisor Tip | 0.614 | 0.508-0.730 | 94.00 | 99.33 |
+| 23 | Upper Molar Cusp Tip | 1.332 | 1.082-1.627 | 84.00 | 95.33 |
+| 24 | Lower Incisor Apex | 1.388 | 1.232-1.549 | 77.33 | 97.33 |
+| 25 | Labrale inferius | 0.942 | 0.801-1.098 | 88.67 | 98.67 |
+| 26 | Labrale superius | 0.652 | 0.564-0.754 | 98.00 | 99.33 |
+| 27 | Soft Tissue Nasion | 0.986 | 0.847-1.133 | 88.67 | 98.67 |
+| 28 | Soft Tissue Pogonion | 1.102 | 0.925-1.305 | 86.00 | 96.67 |
+| 29 | Subnasale | 0.622 | 0.554-0.690 | 99.33 | 100.00 |
 
 ## D. ISBI 2015: clinical measurements and classification
 
